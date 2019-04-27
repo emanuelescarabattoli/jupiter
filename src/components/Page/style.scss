@@ -1,0 +1,53 @@
+.page {
+  margin: 0px auto;
+  padding: 3rem 0px;
+  width: 1000px;
+}
+
+.menu {
+  margin: 0px;
+  padding: 0px;
+}
+
+.menu .logo {
+  margin: 0px 0px 1.5rem 1rem;
+  padding: 0px;
+}
+
+.menu span {
+  margin: 1rem 0px 0.5rem 1rem;
+  padding: 0px;
+  display: block;
+  color: #474d5c;
+  text-transform: uppercase;
+  font-size: 0.7em;
+  font-weight: bolder;
+}
+
+.menu ul {
+  margin: 0px 0px 1.5rem 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+
+.menu li {
+  margin: 0.2rem;
+  padding: 0.5rem 1rem;
+  background-color: #2281ec00;
+  transition: all 0.1s linear ;
+  cursor: pointer;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.menu li:hover {
+  background-color: #2281ecff;
+  color: #ffffff;
+  border-radius: 4px;
+  transition: all 0.1s linear ;
+}
+
+.title {
+  margin: 0px 0px 1.5rem 0px;
+  padding: 0px;
+}
