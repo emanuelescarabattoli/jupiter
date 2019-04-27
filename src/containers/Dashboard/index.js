@@ -1,14 +1,34 @@
-import React from "react";
+import React, { Component } from "react";
+
+import { graphql, compose } from "react-apollo";
 
 import Page from "../../components/Page";
+import { QUERY_LIST_STATISTICS } from "../../queries/";
+import List from "./components/List";
 
-import style from "./style.scss";
+const adaptStatistics = statistics => statistics && statistics.map(record => ({
+  ...record
+})) || [];
 
 
-const Dashboard = () => (
-  <Page title="Dashboard">
-    hgello
-  </Page>
-);
+class Dashboard extends Component {
+  render() {
+    const {
+      queryListStatistics: {
+        loading,
+        listStatistics
+      }
+    } = this.props;
 
-export default Dashboard;
+    return (
+      <Page title="Dashboard">
+        <List
+          loading={loading}
+          statistics={adaptStatistics(listStatistics)}
+        />
+      </Page>
+    );
+  }
+}
+
+export default compose(graphql(QUERY_LIST_STATISTICS, { name: "queryListStatistics" }))(Dashboard);

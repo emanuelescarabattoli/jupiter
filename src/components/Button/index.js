@@ -10,6 +10,7 @@ const Button = ({ disabled, onClick, children, fullWidth }) => (
     onClick={onClick}
   >
     {children}
-  </button>);
+  </button>
+);
 
 export default Button;
