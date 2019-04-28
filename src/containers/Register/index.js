@@ -4,15 +4,11 @@ import { graphql, compose } from "react-apollo";
 
 import Page from "../../components/Page";
 import ButtonFixed from "../../components/ButtonFixed";
-import { QUERY_LIST_REGISTER } from "../../queries/";
-import List from "./components/List";
-
-const adaptRegisters = registers => registers && registers.map(record => ({
-  ...record
-})) || [];
+import { MUTATION_CREATE_REGISTER } from "../../queries/";
+import Detail from "./components/Detail";
 
 
-class Registers extends Component {
+class Registerr extends Component {
   render() {
     const {
       queryListRegister: {
@@ -22,10 +18,9 @@ class Registers extends Component {
     } = this.props;
 
     return (
-      <Page title="Registers">
-        <List
-          loading={loading}
-          registers={adaptRegisters(listRegister)}
+      <Page title="Register">
+        <Detail
+          
         />
         <ButtonFixed><i className="fas fa-plus" /></ButtonFixed>
       </Page>
