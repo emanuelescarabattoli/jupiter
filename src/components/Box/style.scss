@@ -3,22 +3,30 @@
   padding: 0px;
   border-radius: 8px;
   background-color: #e0e0e0;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: all 50ms linear;
+}
+
+.wrapper:hover {
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.8);
+  transition: all 50ms linear;
 }
 
 .headerPositive {
   margin: -1px;
   padding: 0.8rem;
   border-radius: 8px 8px 0px 0px;
-  background-color: #008800;
   clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+  background: linear-gradient(45deg, #007700 0%,#00aa00 100%);
 }
 
 .headerNegative {
   margin: -1px;
   padding: 0.8rem;
   border-radius: 8px 8px 0px 0px;
-  background-color: #880000;
   clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+  background: linear-gradient(45deg, #770000 0%,#aa0000 100%);
 }
 
 
