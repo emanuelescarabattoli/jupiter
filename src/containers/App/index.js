@@ -5,6 +5,7 @@ import { ApolloProvider } from "react-apollo";
 import client from "../../store/client";
 import PrivateRoute from "../../utils/PrivateRoute";
 import Dashboard from "../Dashboard";
+import Registers from "../Registers";
 import Login from "../Login";
 
 
@@ -13,6 +14,7 @@ const App = () => (
     <BrowserRouter>
       <Route exact path="/login" component={Login} />
       <PrivateRoute exact path="/" component={Dashboard} />
+      <PrivateRoute exact path="/registers" component={Registers} />
     </BrowserRouter>
   </ApolloProvider>
 );

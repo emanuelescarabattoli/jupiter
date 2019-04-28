@@ -11,3 +11,13 @@ export const QUERY_LIST_STATISTICS = gql`
     }
   }
 `;
+
+export const QUERY_LIST_REGISTER = gql`
+  {
+    listRegister {
+      id
+      description
+      note
+    }
+  }
+`;
