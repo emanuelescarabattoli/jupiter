@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import { graphql, compose } from "react-apollo";
 
 import Page from "../../components/Page";
+import { Grid, Col } from "../../components/Grid";
+import ButtonFixed from "../../components/ButtonFixed";
 import { QUERY_LIST_REGISTER } from "../../queries/";
 import List from "./components/List";
 
@@ -21,11 +23,15 @@ class Registers extends Component {
     } = this.props;
 
     return (
-      <Page title="Registers">
+      <Page
+        title="Registers"
+
+      >
         <List
           loading={loading}
           registers={adaptRegisters(listRegister)}
         />
+        <ButtonFixed><i className="fas fa-plus" /></ButtonFixed>
       </Page>
     );
   }

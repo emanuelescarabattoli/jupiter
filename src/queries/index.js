@@ -18,6 +18,7 @@ export const QUERY_LIST_REGISTER = gql`
       id
       description
       note
+      amount
     }
   }
 `;

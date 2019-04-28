@@ -9,17 +9,22 @@ const columns = [
   {
     value: "id",
     label: "Id",
-    size: "100"
+    size: "5"
   },
   {
     value: "description",
     label: "Description",
-    size: "100"
+    size: "40"
   },
   {
     value: "note",
     label: "Note",
-    size: "200"
+    size: "50"
+  },
+  {
+    value: "amount",
+    label: "Amount",
+    size: "5"
   }
 ];
 

@@ -8,7 +8,7 @@ const Table = ({ columns, data }) => (
     <table>
       <thead>
         {
-          columns.map(column => <th key={column.value} width={`${column.size}px`}>{column.label}</th>)
+          columns.map(column => <th key={column.value} width={`${column.size}%`}>{column.label}</th>)
         }
       </thead>
       <tbody>
@@ -16,7 +16,7 @@ const Table = ({ columns, data }) => (
           data.map((record, index) => (
             <tr key={index}>
               {
-                columns.map((column, index) => <td key={index}>{record[column.value]}</td>)
+                columns.map((column, index) => <td key={index}>{record[column.value] || "-"}</td>)
               }
             </tr>
           ))
