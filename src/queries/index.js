@@ -22,3 +22,17 @@ export const QUERY_LIST_REGISTER = gql`
     }
   }
 `;
+
+export const MUTATION_CREATE_REGISTER = gql`
+  mutation createRegister($description: String!, $note: String) {
+    mutationRegister(input: {description: $description, note: $note}) {
+      register {
+        id
+      }
+      errors {
+        field
+        messages
+      }
+    }
+  }
+`;

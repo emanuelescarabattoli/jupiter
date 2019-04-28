@@ -8,7 +8,7 @@ import { MUTATION_CREATE_REGISTER } from "../../queries/";
 import Detail from "./components/Detail";
 
 
-class Registerr extends Component {
+class Register extends Component {
   render() {
     const {
       queryListRegister: {
