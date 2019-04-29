@@ -9,18 +9,35 @@ import Detail from "./components/Detail";
 
 
 class Register extends Component {
+
+  constructor(props) {
+    super(props);
+    this.onChangeRegisterDetail = this.onChangeRegisterDetail.bind(this);
+    this.state = {
+      id: 0,
+      registerDetail: { description: "", note: "" }
+    };
+  }
+
+  onChangeRegisterDetail(event) {
+    this.setState({
+      registerDetail: { ...this.state.registerDetail, [event.target.name]: event.target.value }
+    });
+  }
+
   render() {
     const {
-      queryListRegister: {
-        loading,
-        listRegister
-      }
+      isLoadingCreateRegister
     } = this.props;
-
+    const {
+      registerDetail
+    } = this.state;
     return (
       <Page title="Register">
         <Detail
-          
+          loading={isLoadingCreateRegister}
+          onChangeRegisterDetail={this.onChangeRegisterDetail}
+          registerDetail={registerDetail}
         />
         <ButtonFixed><i className="fas fa-plus" /></ButtonFixed>
       </Page>
@@ -28,4 +45,14 @@ class Register extends Component {
   }
 }
 
-export default compose(graphql(QUERY_LIST_REGISTER, { name: "queryListRegister" }))(Registers);
+export default compose(
+  graphql(
+    MUTATION_CREATE_REGISTER,
+    {
+      name: "createRegister",
+      props: ({ createRegister }) => ({
+        isLoadingCreateRegister: createRegister.loading
+      })
+    }
+  )
+)(Register);

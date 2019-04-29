@@ -2,8 +2,6 @@ import React from "react";
 
 import Table from "../../../components/Table";
 
-import style from "./style.scss";
-
 
 const columns = [
   {

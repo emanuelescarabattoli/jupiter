@@ -7,24 +7,23 @@ import ButtonFixed from "../../components/ButtonFixed";
 import { QUERY_LIST_REGISTER } from "../../queries/";
 import List from "./components/List";
 
-const adaptRegisters = registers => registers && registers.map(record => ({
-  ...record
-})) || [];
+const adaptRegisters = registers => registers && registers.map(record => (
+  {
+    ...record
+  }
+)) || [];
 
 
 class Registers extends Component {
   render() {
     const {
-      queryListRegister: {
-        loading,
-        listRegister
-      }
+      isLoadingListRegister,
+      listRegister
     } = this.props;
-
     return (
       <Page title="Registers">
         <List
-          loading={loading}
+          loading={isLoadingListRegister}
           registers={adaptRegisters(listRegister)}
         />
         <ButtonFixed><i className="fas fa-plus" /></ButtonFixed>
@@ -33,4 +32,15 @@ class Registers extends Component {
   }
 }
 
-export default compose(graphql(QUERY_LIST_REGISTER, { name: "queryListRegister" }))(Registers);
+export default compose(
+  graphql(
+    QUERY_LIST_REGISTER,
+    {
+      name: "listRegister",
+      props: ({ listRegister }) => ({
+        isLoadingListRegister: listRegister.loading,
+        listRegister: listRegister.listRegister
+      })
+    }
+  )
+)(Registers);
