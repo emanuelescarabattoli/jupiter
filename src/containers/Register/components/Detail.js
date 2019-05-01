@@ -1,13 +1,14 @@
 import React from "react";
 
-import Table from "../../../components/Table";
+import { Card, CardBody } from "../../../components/Card";
 
 
 const Detail = ({ loading, onChangeRegisterDetail, registerDetail }) => (
-  <Table
-    columns={columns}
-    data={registers}
-  />
+  <Card>
+    <CardBody>
+      foo
+    </CardBody>
+  </Card>
 );
 
 export default Detail;

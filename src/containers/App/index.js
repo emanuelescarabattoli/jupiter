@@ -6,6 +6,7 @@ import client from "../../store/client";
 import PrivateRoute from "../../utils/PrivateRoute";
 import Dashboard from "../Dashboard";
 import Registers from "../Registers";
+import Register from "../Register";
 import Login from "../Login";
 
 
@@ -15,6 +16,7 @@ const App = () => (
       <Route exact path="/login" component={Login} />
       <PrivateRoute exact path="/" component={Dashboard} />
       <PrivateRoute exact path="/registers" component={Registers} />
+      <PrivateRoute exact path="/register" component={Register} />
     </BrowserRouter>
   </ApolloProvider>
 );

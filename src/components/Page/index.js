@@ -33,7 +33,7 @@ const Page = ({ children, title }) => (
           </ul>
         </div>
       </Col>
-      <Col size={11}>
+      <Col size={9}>
         <h3 className={style.title}>{title}</h3>
         {children}
       </Col>

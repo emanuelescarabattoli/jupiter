@@ -39,7 +39,6 @@ class Register extends Component {
           onChangeRegisterDetail={this.onChangeRegisterDetail}
           registerDetail={registerDetail}
         />
-        <ButtonFixed><i className="fas fa-plus" /></ButtonFixed>
       </Page>
     );
   }
