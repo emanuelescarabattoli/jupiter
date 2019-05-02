@@ -1,0 +1,15 @@
+.wrapper label {
+  margin: 0px 0px 0.2rem 0px;
+  padding: 0px;
+  display: block;
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+.wrapper input {
+  margin: 0px;
+  padding: 0.4rem;
+  width: calc(#{100%} - #{0.8rem});
+  border: solid 1px #e0e0e0;
+  border-radius: 3px;
+}

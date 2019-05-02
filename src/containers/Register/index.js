@@ -36,8 +36,8 @@ class Register extends Component {
       <Page title="Register">
         <Detail
           loading={isLoadingCreateRegister}
-          onChangeRegisterDetail={this.onChangeRegisterDetail}
-          registerDetail={registerDetail}
+          onChange={this.onChangeRegisterDetail}
+          detail={registerDetail}
         />
       </Page>
     );
