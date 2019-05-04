@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { graphql, compose } from "react-apollo";
 
 import Page from "../../components/Page";
-import { MUTATION_CREATE_REGISTER } from "../../queries/";
+import { MUTATION_CREATE_REGISTER, QUERY_DETAIL_REGISTER } from "../../queries/";
 import Detail from "./components/Detail";
 
 
@@ -20,6 +20,12 @@ class Register extends Component {
     };
   }
 
+  componentDidMount() {
+    if (this.props.match.params.id) {
+      this.props.detailRegister();
+    }
+  }
+
   onChangeRegisterDetail(event) {
     this.setState({
       registerDetail: { ...this.state.registerDetail, [event.target.name]: event.target.value }
@@ -27,9 +33,15 @@ class Register extends Component {
   }
 
   onClickSave() {
+    this.setState({ errorRegisterDetail: "" });
     this.props.createRegister({ variables: { ...this.state.registerDetail } })
-      .then(result => 
-        result.data.mutationRegister.errors.length && this.setState({errorRegisterDetail: result.data.mutationRegister.errors.reduce((message, error) => message + error.field + error.messages[0], "")}));
+      .then(result => {
+        if (result.data.mutationRegister.errors.length) {
+          this.setState({ errorRegisterDetail: result.data.mutationRegister.errors.reduce((message, error) => message + error.field + error.messages[0], "") });
+        } else {
+          this.props.history.push(`/register/${result.data.mutationRegister.register.id}`);
+        }
+      });
   }
 
   render() {
@@ -65,5 +77,15 @@ export default compose(
         isLoadingCreateRegister: createRegister.loading
       })
     }
-  )
+  ),
+  graphql(
+    QUERY_DETAIL_REGISTER,
+    {
+      name: "detailRegister",
+      props: ({ detailRegister }) => ({
+        detailRegister: detailRegister,
+        isLoadingDetailRegister: detailRegister.loading
+      })
+    }
+  ),
 )(Register);
