@@ -3,10 +3,10 @@ import React from "react";
 import style from "./style.scss";
 
 
-const Button = ({ disabled, onClick, children, fullWidth }) => (
+const Button = ({ disabled, onClick, children, fullWidth, light }) => (
   <button
     disabled={disabled}
-    className={`${style.button} ${fullWidth ? style.fullWidth : undefined}`}
+    className={`${light ? style.light : style.button} ${fullWidth ? style.fullWidth : undefined}`}
     onClick={onClick}
   >
     {children}
