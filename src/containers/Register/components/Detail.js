@@ -9,7 +9,7 @@ import Button from "../../../components/Button";
 import AlignRight from "../../../components/AlignRight";
 
 
-const Detail = ({ loading, onChange, detail }) => (
+const Detail = ({ loading, onChange, detail, onClickSave, error }) => (
   <Card>
     <CardHeader>
       <Grid>
@@ -22,12 +22,13 @@ const Detail = ({ loading, onChange, detail }) => (
         </Col>
         <Col size={6}>
           <AlignRight>
-            <Button light>Save</Button>
+            <Button light onClick={onClickSave}>Save</Button>
           </AlignRight>
         </Col>
       </Grid>
     </CardHeader>
     <CardBody>
+      {error && error}
       <Grid>
         <Col size={12}>
           <FieldWrapper>
