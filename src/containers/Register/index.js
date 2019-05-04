@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { graphql, compose } from "react-apollo";
 
 import Page from "../../components/Page";
-import ButtonFixed from "../../components/ButtonFixed";
 import { MUTATION_CREATE_REGISTER } from "../../queries/";
 import Detail from "./components/Detail";
 

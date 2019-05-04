@@ -7,6 +7,7 @@ import Input from "../../../components/Input";
 import Title from "../../../components/Title";
 import Button from "../../../components/Button";
 import AlignRight from "../../../components/AlignRight";
+import MessageError from "../../../components/MessageError";
 
 
 const Detail = ({ loading, onChange, detail, onClickSave, error }) => (
@@ -15,7 +16,7 @@ const Detail = ({ loading, onChange, detail, onClickSave, error }) => (
       <Grid>
         <Col size={6}>
           <Title
-            subtitle="A register contains a a list of items and a total"
+            subtitle="A register contains a list of items and a total"
           >
             Register detail
           </Title>
@@ -28,7 +29,7 @@ const Detail = ({ loading, onChange, detail, onClickSave, error }) => (
       </Grid>
     </CardHeader>
     <CardBody>
-      {error && error}
+      {error && <MessageError>{error}</MessageError>}
       <Grid>
         <Col size={12}>
           <FieldWrapper>
