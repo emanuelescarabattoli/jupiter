@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const QUERY_LIST_STATISTICS = gql`
+export const QUERY_STATISTICS_LIST = gql`
   {
     listStatistics {
       id
@@ -12,7 +12,7 @@ export const QUERY_LIST_STATISTICS = gql`
   }
 `;
 
-export const QUERY_LIST_REGISTER = gql`
+export const QUERY_REGISTER_LIST = gql`
   {
     listRegister {
       id
@@ -23,8 +23,8 @@ export const QUERY_LIST_REGISTER = gql`
   }
 `;
 
-export const QUERY_DETAIL_REGISTER = gql`
-  detailRegister($id: Int) {
+export const QUERY_REGISTER_DETAIL = gql`
+  query detailRegister($id: Int) {
     detailRegister(id: $id) {
       id
       description
@@ -32,7 +32,7 @@ export const QUERY_DETAIL_REGISTER = gql`
   }
 `;
 
-export const MUTATION_CREATE_REGISTER = gql`
+export const MUTATION_REGISTER_CREATE = gql`
   mutation createRegister($description: String!, $note: String) {
     mutationRegister(input: {description: $description, note: $note}) {
       register {

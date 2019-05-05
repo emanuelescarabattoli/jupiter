@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import style from "./style.scss";
 
@@ -9,5 +10,10 @@ const Title = ({ children, subtitle }) => (
     {subtitle && <small>{subtitle}</small>}
   </div>
 );
+
+Title.propTypes = {
+  children: PropTypes.any.isRequired,
+  subtitle: PropTypes.string.isRequired
+};
 
 export default Title;

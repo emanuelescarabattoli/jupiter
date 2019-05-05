@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { Grid, Col } from "../Grid";
 import Button from "../Button";
@@ -40,5 +41,10 @@ const Page = ({ children, title }) => (
     </Grid>
   </div>
 );
+
+Page.propTypes = {
+  children: PropTypes.any.isRequired,
+  title: PropTypes.string.isRequired
+};
 
 export default Page;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import Table from "../../../components/Table";
 
@@ -32,5 +33,9 @@ const List = ({ registers }) => (
     data={registers}
   />
 );
+
+List.propTypes = {
+  registers: PropTypes.array.isRequired
+};
 
 export default List;

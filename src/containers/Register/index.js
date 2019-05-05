@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { graphql, compose } from "react-apollo";
 
 import Page from "../../components/Page";
-import { MUTATION_CREATE_REGISTER, QUERY_DETAIL_REGISTER } from "../../queries/";
+import { MUTATION_REGISTER_CREATE, QUERY_REGISTER_DETAIL } from "../../queries/";
 import Detail from "./components/Detail";
 
 
@@ -58,7 +58,7 @@ class Register extends Component {
         <Detail
           loading={isLoadingCreateRegister}
           onChange={this.onChangeRegisterDetail}
-          onClickSave={this.onClickSave}
+          onSave={this.onClickSave}
           detail={registerDetail}
           error={errorRegisterDetail}
         />
@@ -69,7 +69,7 @@ class Register extends Component {
 
 export default compose(
   graphql(
-    MUTATION_CREATE_REGISTER,
+    MUTATION_REGISTER_CREATE,
     {
       name: "createRegister",
       props: ({ createRegister }) => ({
@@ -79,7 +79,7 @@ export default compose(
     }
   ),
   graphql(
-    QUERY_DETAIL_REGISTER,
+    QUERY_REGISTER_DETAIL,
     {
       name: "detailRegister",
       props: ({ detailRegister }) => ({

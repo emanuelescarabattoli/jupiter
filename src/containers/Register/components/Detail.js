@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { Card, CardHeader, CardBody } from "../../../components/Card";
 import { Grid, Col } from "../../../components/Grid";
@@ -10,7 +11,7 @@ import AlignRight from "../../../components/AlignRight";
 import MessageError from "../../../components/MessageError";
 
 
-const Detail = ({ loading, onChange, detail, onClickSave, error }) => (
+const Detail = ({ onChange, detail, onSave, error }) => (
   <Card>
     <CardHeader>
       <Grid>
@@ -23,7 +24,7 @@ const Detail = ({ loading, onChange, detail, onClickSave, error }) => (
         </Col>
         <Col size={6}>
           <AlignRight>
-            <Button light onClick={onClickSave}>Save</Button>
+            <Button light onClick={onSave}>Save</Button>
           </AlignRight>
         </Col>
       </Grid>
@@ -53,5 +54,12 @@ const Detail = ({ loading, onChange, detail, onClickSave, error }) => (
     </CardBody>
   </Card>
 );
+
+Detail.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  detail: PropTypes.any.isRequired,
+  onSave: PropTypes.func.isRequired,
+  error: PropTypes.string.isRequired
+};
 
 export default Detail;

@@ -1,30 +1,27 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import { graphql, compose } from "react-apollo";
 
 import Page from "../../components/Page";
 import ButtonFixed from "../../components/ButtonFixed";
-import { QUERY_LIST_REGISTER } from "../../queries/";
+import { QUERY_REGISTER_LIST } from "../../queries/";
 import List from "./components/List";
 
-const adaptRegisters = registers => registers && registers.map(record => (
-  {
-    ...record
-  }
-)) || [];
 
+const adaptRegisters = registers => registers && registers.map(record => ({ ...record })) || [];
 
 class Registers extends Component {
   render() {
     const {
-      isLoadingListRegister,
-      listRegister
+      loading,
+      registers
     } = this.props;
     return (
       <Page title="Registers">
         <List
-          loading={isLoadingListRegister}
-          registers={adaptRegisters(listRegister)}
+          loading={loading}
+          registers={registers}
         />
         <ButtonFixed><i className="fas fa-plus" /></ButtonFixed>
       </Page>
@@ -32,15 +29,23 @@ class Registers extends Component {
   }
 }
 
+
+Registers.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  registers: PropTypes.array.isRequired
+};
+
 export default compose(
   graphql(
-    QUERY_LIST_REGISTER,
+    QUERY_REGISTER_LIST,
     {
       name: "listRegister",
-      props: ({ listRegister }) => ({
-        isLoadingListRegister: listRegister.loading,
-        listRegister: listRegister.listRegister
-      })
+      props: ({ listRegister }) => (
+        {
+          loading: listRegister.loading,
+          registers: adaptRegisters(listRegister.listRegister)
+        }
+      )
     }
   )
 )(Registers);
