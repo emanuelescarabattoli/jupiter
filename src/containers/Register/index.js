@@ -1,18 +1,18 @@
 import React, { Component } from "react";
-
+import PropTypes from "prop-types";
 import { graphql, compose } from "react-apollo";
 
 import Page from "../../components/Page";
 import { MUTATION_REGISTER_CREATE, QUERY_REGISTER_DETAIL } from "../../queries/";
 import Detail from "./components/Detail";
+import { getErrorMessage } from "../../utils";
 
 
 class Register extends Component {
-
   constructor(props) {
     super(props);
-    this.onChangeRegisterDetail = this.onChangeRegisterDetail.bind(this);
-    this.onClickSave = this.onClickSave.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onSave = this.onSave.bind(this);
     this.state = {
       id: 0,
       registerDetail: { description: "", note: "" },
@@ -22,22 +22,24 @@ class Register extends Component {
 
   componentDidMount() {
     if (this.props.match.params.id) {
-      this.props.detailRegister();
+      console.log(this.props);
+      this.props.detailRegister({ variables: { id: this.props.match.params.id } })
+        .then(result => console.log(result) || this.setState({ registerDetail: result}));
     }
   }
 
-  onChangeRegisterDetail(event) {
+  onChange(event) {
     this.setState({
       registerDetail: { ...this.state.registerDetail, [event.target.name]: event.target.value }
     });
   }
 
-  onClickSave() {
+  onSave() {
     this.setState({ errorRegisterDetail: "" });
-    this.props.createRegister({ variables: { ...this.state.registerDetail } })
+    this.props.mutationRegister({ variables: { ...this.state.registerDetail } })
       .then(result => {
         if (result.data.mutationRegister.errors.length) {
-          this.setState({ errorRegisterDetail: result.data.mutationRegister.errors.reduce((message, error) => message + error.field + error.messages[0], "") });
+          this.setState({ errorRegisterDetail: getErrorMessage(result.data.mutationRegister.errors) });
         } else {
           this.props.history.push(`/register/${result.data.mutationRegister.register.id}`);
         }
@@ -46,19 +48,18 @@ class Register extends Component {
 
   render() {
     const {
-      isLoadingCreateRegister
+      loadingCreateRegister
     } = this.props;
     const {
       registerDetail,
       errorRegisterDetail
     } = this.state;
-    console.log(errorRegisterDetail);
     return (
       <Page title="Register">
         <Detail
-          loading={isLoadingCreateRegister}
-          onChange={this.onChangeRegisterDetail}
-          onSave={this.onClickSave}
+          loading={loadingCreateRegister}
+          onChange={this.onChange}
+          onSave={this.onSave}
           detail={registerDetail}
           error={errorRegisterDetail}
         />
@@ -67,14 +68,22 @@ class Register extends Component {
   }
 }
 
+Register.propTypes = {
+  match: PropTypes.object.isRequired,
+  detailRegister: PropTypes.func.isRequired,
+  mutationRegister: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  loadingCreateRegister: PropTypes.bool.isRequired
+};
+
 export default compose(
   graphql(
     MUTATION_REGISTER_CREATE,
     {
-      name: "createRegister",
-      props: ({ createRegister }) => ({
-        createRegister: createRegister,
-        isLoadingCreateRegister: createRegister.loading
+      name: "mutationRegister",
+      props: ({ mutationRegister }) => ({
+        mutationRegister,
+        loadingCreateRegister: mutationRegister.loading
       })
     }
   ),
@@ -83,8 +92,8 @@ export default compose(
     {
       name: "detailRegister",
       props: ({ detailRegister }) => ({
-        detailRegister: detailRegister,
-        isLoadingDetailRegister: detailRegister.loading
+        detailRegister,
+        loadingDetailRegister: detailRegister.loading
       })
     }
   ),

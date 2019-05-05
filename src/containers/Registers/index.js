@@ -29,7 +29,6 @@ class Registers extends Component {
   }
 }
 
-
 Registers.propTypes = {
   loading: PropTypes.bool.isRequired,
   registers: PropTypes.array.isRequired
