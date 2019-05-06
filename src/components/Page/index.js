@@ -13,7 +13,7 @@ const Page = ({ children, title }) => (
       <Col size={3}>
         <div className={style.menu}>
           <h3 className={style.logo}><i className="fas fa-chart-pie fa-spacing" />Jupiter</h3>
-          <Button fullWidth><i className="fas fa-plus fa-spacing" />New Register</Button>
+          <Button fullWidth onClick={() => undefined}><i className="fas fa-plus fa-spacing" />New Register</Button>
           <span>Menu</span>
           <ul>
             <li>
