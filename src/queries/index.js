@@ -29,13 +29,14 @@ export const QUERY_REGISTER_DETAIL = gql`
     detailRegister(id: $id) {
       id
       description
+      note
     }
   }
 `;
 
-export const MUTATION_REGISTER_CREATE = gql`
-  mutation mutationRegister($description: String!, $note: String) {
-    mutationRegister(input: {description: $description, note: $note}) {
+export const MUTATION_REGISTER = gql`
+  mutation mutationRegister($id: ID, $description: String!, $note: String) {
+    mutationRegister(input: {id: $id, description: $description, note: $note}) {
       register {
         id
       }

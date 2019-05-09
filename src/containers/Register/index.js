@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { graphql, compose } from "react-apollo";
 
 import Page from "../../components/Page";
-import { MUTATION_REGISTER_CREATE, QUERY_REGISTER_DETAIL } from "../../queries/";
+import { MUTATION_REGISTER, QUERY_REGISTER_DETAIL } from "../../queries/";
 import Detail from "./components/Detail";
 import { getErrorMessage } from "../../utils";
 
@@ -20,9 +20,9 @@ class Register extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log(this.props);
-    if (this.props.register) {
+  componentDidUpdate(props) {
+    if (!props.register && this.props.register) {
+      console.log(this.props.register);
       this.setState({ register: this.props.register });
     }
   }
@@ -76,7 +76,7 @@ Register.defaultProps = {
 
 export default compose(
   graphql(
-    MUTATION_REGISTER_CREATE,
+    MUTATION_REGISTER,
     {
       name: "mutationRegister"
     }
@@ -87,9 +87,8 @@ export default compose(
       name: "detailRegister",
       skip: props => !props.match.params.id,
       props: ({ detailRegister }) => ({
-        detailRegister,
-        loadingDetailRegister: detailRegister.loading,
-        register: detailRegister.data
+        register: detailRegister.detailRegister,
+        loadingDetailRegister: detailRegister.loading
       }),
       options: props => ({
         variables: {
