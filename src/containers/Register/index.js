@@ -7,17 +7,20 @@ import { MUTATION_REGISTER, QUERY_REGISTER_DETAIL } from "../../queries/";
 import Detail from "./components/Detail/";
 import { getErrorMessage } from "../../utils";
 import List from "./components/List/";
+import Item from "./components/Item/";
 
 
 class Register extends Component {
   constructor(props) {
     super(props);
-    this.onChange = this.onChange.bind(this);
-    this.onSave = this.onSave.bind(this);
+    this.onChangeRegister = this.onChangeRegister.bind(this);
+    this.onSaveRegister = this.onSaveRegister.bind(this);
+    this.onClickNewItem = this.onClickNewItem.bind(this);
     this.state = {
       id: 0,
       register: { id: "", description: "", note: "", itemSet: [] },
-      errorRegisterDetail: ""
+      errorRegister: "",
+      modalVisible: false
     };
   }
 
@@ -27,20 +30,37 @@ class Register extends Component {
     }
   }
 
-  onChange(event) {
+  onChangeRegister(event) {
     this.setState({
       register: { ...this.state.register, [event.target.name]: event.target.value }
     });
   }
 
-  onSave() {
-    this.setState({ errorRegisterDetail: "" });
-    this.props.mutationRegister({ variables: { ...this.state.register } })
+  onSaveRegister() {
+    this.saveRegister().then(result => {
+      if (result !== -1) {
+        this.props.history.push(`/register/${result}`);
+      }
+    });
+  }
+
+  onClickNewItem() {
+    this.saveRegister(result => {
+      if (result) {
+        this.setState({modalVisible: true});
+      }
+    });
+  }
+
+  saveRegister() {
+    this.setState({ errorRegister: "" });
+    return this.props.mutationRegister({ variables: { ...this.state.register } })
       .then(result => {
         if (result.data.mutationRegister.errors.length) {
-          this.setState({ errorRegisterDetail: getErrorMessage(result.data.mutationRegister.errors) });
+          this.setState({ errorRegister: getErrorMessage(result.data.mutationRegister.errors) });
+          return -1;
         } else {
-          this.props.history.push(`/register/${result.data.mutationRegister.register.id}`);
+          return result.data.mutationRegister.register.id;
         }
       });
   }
@@ -48,19 +68,22 @@ class Register extends Component {
   render() {
     const {
       register,
-      errorRegisterDetail
+      errorRegister
     } = this.state;
     return (
       <Page title="Register">
         <Detail
-          onChange={this.onChange}
-          onSave={this.onSave}
+          onChange={this.onChangeRegister}
+          onSave={this.onSaveRegister}
+          onClickNewItem={this.onClickNewItem}
           detail={register}
-          error={errorRegisterDetail}
+          error={errorRegister}
+          isVisibleNewItemButton={register.id !== ""}
         />
         <List
           items={register.itemSet}
         />
+        <Item />
       </Page>
     );
   }

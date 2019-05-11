@@ -9,9 +9,11 @@ import Title from "../../../../components/Title";
 import Button from "../../../../components/Button";
 import AlignRight from "../../../../components/AlignRight";
 import MessageError from "../../../../components/MessageError";
+import ButtonsWrapper from "../../../../components/ButtonsWrapper";
+import ShowHideArea from "../../../../components/ShowHideArea";
 
 
-const Detail = ({ onChange, detail, onSave, error }) => (
+const Detail = ({ onChange, detail, onSave, error, onClickNewItem, isVisibleNewItemButton }) => (
   <Card>
     <CardHeader>
       <Grid>
@@ -24,7 +26,12 @@ const Detail = ({ onChange, detail, onSave, error }) => (
         </Col>
         <Col size={6}>
           <AlignRight>
-            <Button light onClick={onSave}>Save</Button>
+            <ButtonsWrapper>
+              <ShowHideArea inLine isVisible={isVisibleNewItemButton}>
+                <Button light onClick={onClickNewItem}>New item</Button>
+              </ShowHideArea>
+              <Button light onClick={onSave}>Save</Button>
+            </ButtonsWrapper>
           </AlignRight>
         </Col>
       </Grid>
