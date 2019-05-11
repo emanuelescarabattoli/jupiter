@@ -30,6 +30,15 @@ export const QUERY_REGISTER_DETAIL = gql`
       id
       description
       note
+      amount
+      itemSet {
+        id
+        date
+        description
+        period
+        amount
+        note
+      }
     }
   }
 `;

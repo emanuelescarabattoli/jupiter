@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Box from "../../../components/Box";
-import { Grid, Col } from "../../../components/Grid";
+import Box from "../../../../components/Box";
+import { Grid, Col } from "../../../../components/Grid";
 
 
 const List = ({ statistics }) => (

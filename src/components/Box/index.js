@@ -18,7 +18,7 @@ const Box = ({ description, value, note }) => (
       </span>
     </div>
     <div className={style.content}>
-      <span>{note}</span>
+      <span>{note || "No note found"}</span>
     </div>
   </div>
 );
@@ -26,11 +26,7 @@ const Box = ({ description, value, note }) => (
 Box.propTypes = {
   description: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
-  note: PropTypes.string
-};
-
-Box.defaultProps = {
-  note: "No note found"
+  note: PropTypes.string.isRequired
 };
 
 export default Box;

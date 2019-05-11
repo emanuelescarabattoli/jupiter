@@ -6,7 +6,7 @@ import { graphql, compose } from "react-apollo";
 import Page from "../../components/Page";
 import ButtonFixed from "../../components/ButtonFixed";
 import { QUERY_REGISTER_LIST } from "../../queries/";
-import List from "./components/List";
+import List from "./components/List/";
 
 
 const adaptRegisters = registers => registers && registers.map(record => ({ ...record })) || [];

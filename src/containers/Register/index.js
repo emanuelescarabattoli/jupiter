@@ -4,8 +4,9 @@ import { graphql, compose } from "react-apollo";
 
 import Page from "../../components/Page";
 import { MUTATION_REGISTER, QUERY_REGISTER_DETAIL } from "../../queries/";
-import Detail from "./components/Detail";
+import Detail from "./components/Detail/";
 import { getErrorMessage } from "../../utils";
+import List from "./components/List/";
 
 
 class Register extends Component {
@@ -15,14 +16,13 @@ class Register extends Component {
     this.onSave = this.onSave.bind(this);
     this.state = {
       id: 0,
-      register: { id: "", description: "", note: "" },
+      register: { id: "", description: "", note: "", itemSet: [] },
       errorRegisterDetail: ""
     };
   }
 
   componentDidUpdate(props) {
     if (!props.register && this.props.register) {
-      console.log(this.props.register);
       this.setState({ register: this.props.register });
     }
   }
@@ -57,6 +57,9 @@ class Register extends Component {
           onSave={this.onSave}
           detail={register}
           error={errorRegisterDetail}
+        />
+        <List
+          items={register.itemSet}
         />
       </Page>
     );
