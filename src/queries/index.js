@@ -55,7 +55,20 @@ export const MUTATION_REGISTER = gql`
       }
     }
   }
-`;
+  `;
+  
+export const QUERY_ITEM_DETAIL = gql`
+    query detailItem($id: Int) {
+      detailItem(id: id) {
+        id
+        date
+        description
+        period
+        amount
+        note
+      }
+    }
+  `;
 
 export const MUTATION_ITEM = gql`
   mutation mutationItem($id: ID, $date: Date!, $description: String!, $period: String!, $amount: Float!, $note: String, $register: ID!) {
@@ -67,19 +80,6 @@ export const MUTATION_ITEM = gql`
         field
         messages
       }
-    }
-  }
-`;
-
-export const QUERY_ITEM_DETAIL = gql`
-  query detailItem($id: Int) {
-    detailItem(id: id) {
-      id
-      date
-      description
-      period
-      amount
-      note
     }
   }
 `;

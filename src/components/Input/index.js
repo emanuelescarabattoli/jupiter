@@ -4,7 +4,16 @@ import PropTypes from "prop-types";
 import style from "./style.scss";
 
 
-const Input = ({ type, name, label, placeholder, value, onChange }) => (
+const Input = (
+  {
+    type,
+    name,
+    label,
+    placeholder,
+    value,
+    onChange
+  }
+) => (
   <div className={style.wrapper}>
     <label htmlFor={name}>{label}</label>
     <input

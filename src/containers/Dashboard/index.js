@@ -5,7 +5,7 @@ import { graphql, compose } from "react-apollo";
 
 import Page from "../../components/Page";
 import { QUERY_STATISTICS_LIST } from "../../queries";
-import List from "./components/List/";
+import StatisticsList from "./components/StatisticsList";
 
 
 const adaptStatistics = statistics => statistics && statistics.map(record => ({ ...record })) || [];
@@ -13,13 +13,13 @@ const adaptStatistics = statistics => statistics && statistics.map(record => ({ 
 class Dashboard extends Component {
   render() {
     const {
-      loading,
+      loadingStatistics,
       statistics
     } = this.props;
     return (
       <Page title="Dashboard">
-        <List
-          loading={loading}
+        <StatisticsList
+          loading={loadingStatistics}
           statistics={statistics}
         />
       </Page>
@@ -28,7 +28,7 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  loading: PropTypes.bool.isRequired,
+  loadingStatistics: PropTypes.bool.isRequired,
   statistics: PropTypes.array.isRequired
 };
 
@@ -39,7 +39,7 @@ export default compose(
       name: "listStatistics",
       props: ({ listStatistics }) => (
         {
-          loading: listStatistics.loading,
+          loadingStatistics: listStatistics.loading,
           statistics: adaptStatistics(listStatistics.listStatistics)
         }
       )

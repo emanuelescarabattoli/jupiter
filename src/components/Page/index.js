@@ -8,7 +8,7 @@ import style from "./style.scss";
 
 
 const Page = ({ children, title }) => (
-  <div className={style.page}>
+  <div className={style.wrapper}>
     <Grid>
       <Col size={3}>
         <div className={style.menu}>

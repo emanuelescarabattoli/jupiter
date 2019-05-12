@@ -8,12 +8,12 @@ import Input from "../../../../components/Input";
 import Title from "../../../../components/Title";
 import Button from "../../../../components/Button";
 import AlignRight from "../../../../components/AlignRight";
-import MessageError from "../../../../components/MessageError";
 import ButtonsWrapper from "../../../../components/ButtonsWrapper";
 import ShowHideArea from "../../../../components/ShowHideArea";
+import { displayErrorMessage } from "../../../../utils/";
 
 
-const Detail = ({ onChange, detail, onSave, error, onClickNewItem, isVisibleNewItemButton }) => (
+const RegisterDetail = ({ onChange, detail, onSave, error, onClickNewItem, isVisibleNewItemButton }) => (
   <Card>
     <CardHeader>
       <Grid>
@@ -37,7 +37,7 @@ const Detail = ({ onChange, detail, onSave, error, onClickNewItem, isVisibleNewI
       </Grid>
     </CardHeader>
     <CardBody>
-      {error && <MessageError>{error}</MessageError>}
+      {displayErrorMessage(error)}
       <Grid>
         <Col size={12}>
           <FieldWrapper>
@@ -62,11 +62,11 @@ const Detail = ({ onChange, detail, onSave, error, onClickNewItem, isVisibleNewI
   </Card>
 );
 
-Detail.propTypes = {
+RegisterDetail.propTypes = {
   onChange: PropTypes.func.isRequired,
   detail: PropTypes.any.isRequired,
   onSave: PropTypes.func.isRequired,
   error: PropTypes.string.isRequired
 };
 
-export default Detail;
+export default RegisterDetail;

@@ -3,11 +3,16 @@ import PropTypes from "prop-types";
 import { graphql, compose } from "react-apollo";
 
 import Page from "../../components/Page";
-import { MUTATION_REGISTER, QUERY_REGISTER_DETAIL, QUERY_ITEM_DETAIL, MUTATION_ITEM } from "../../queries/";
-import Detail from "./components/Detail/";
 import { getErrorMessage } from "../../utils";
-import List from "./components/List/";
-import Item from "./components/Item/";
+import RegisterDetail from "./components/RegisterDetail";
+import ItemsList from "./components/ItemsList";
+import ItemDetailModal from "./components/ItemDetailModal";
+import {
+  MUTATION_REGISTER,
+  QUERY_REGISTER_DETAIL,
+  QUERY_ITEM_DETAIL,
+  MUTATION_ITEM
+} from "../../queries/";
 
 
 class Register extends Component {
@@ -15,7 +20,7 @@ class Register extends Component {
     super(props);
     this.state = {
       register: { id: "", description: "", note: "", itemSet: [] },
-      item: { id: "", description: "", note: "", period: "", amount: "" },
+      item: { id: "", description: "", note: "", period: "", amount: "", date: "" },
       errorRegister: "",
       errorItem: "",
       modalVisible: false
@@ -102,7 +107,7 @@ class Register extends Component {
     } = this.state;
     return (
       <Page title="Register">
-        <Detail
+        <RegisterDetail
           detail={register}
           error={errorRegister}
           onChange={this.onChangeRegister}
@@ -110,10 +115,10 @@ class Register extends Component {
           onClickNewItem={this.onClickNewItem}
           isVisibleNewItemButton={register.id !== ""}
         />
-        <List
+        <ItemsList
           items={register.itemSet}
         />
-        <Item
+        <ItemDetailModal
           detail={item}
           error={errorItem}
           onChange={this.onChangeItem}
@@ -127,22 +132,14 @@ class Register extends Component {
 
 Register.propTypes = {
   match: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
   mutationRegister: PropTypes.func.isRequired,
+  mutationItem: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   register: PropTypes.object
 };
 
-Register.defaultProps = {
-  register: undefined
-};
-
 export default compose(
-  graphql(
-    MUTATION_REGISTER,
-    {
-      name: "mutationRegister"
-    }
-  ),
   graphql(
     QUERY_REGISTER_DETAIL,
     {
@@ -153,6 +150,8 @@ export default compose(
         loadingDetailRegister: detailRegister.loading
       }),
       options: props => ({
+        notifyOnNetworkStatusChange: true,
+        fetchPolicy: "network-only",
         variables: {
           id: props.match.params.registerId
         }
@@ -160,9 +159,9 @@ export default compose(
     }
   ),
   graphql(
-    MUTATION_ITEM,
+    MUTATION_REGISTER,
     {
-      name: "mutationItem"
+      name: "mutationRegister"
     }
   ),
   graphql(
@@ -178,6 +177,22 @@ export default compose(
         variables: {
           id: props.match.params.itemId
         }
+      })
+    }
+  ),
+  graphql(
+    MUTATION_ITEM,
+    {
+      name: "mutationItem",
+      options: props => ({
+        refetchQueries: [
+          {
+            query: QUERY_REGISTER_DETAIL,
+            variables: {
+              id: props.match.params.registerId
+            }
+          }
+        ]
       })
     }
   ),

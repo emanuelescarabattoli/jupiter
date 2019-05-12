@@ -6,7 +6,7 @@ import style from "./style.scss";
 
 const Button = ({ disabled, onClick, children, fullWidth, light }) => (
   <button
-    className={`${light ? style.light : style.button} ${fullWidth ? style.fullWidth : undefined}`}
+    className={`${light ? style.buttonLight : style.buttonDefault} ${fullWidth && style.fullWidth}`}
     onClick={onClick}
     disabled={disabled}
   >

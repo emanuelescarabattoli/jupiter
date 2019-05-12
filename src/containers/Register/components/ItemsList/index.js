@@ -11,13 +11,18 @@ const columns = [
     size: "5"
   },
   {
+    value: "date",
+    label: "Date",
+    size: "40"
+  },
+  {
     value: "description",
     label: "Description",
     size: "40"
   },
   {
-    value: "note",
-    label: "Note",
+    value: "period",
+    label: "Period",
     size: "50"
   },
   {
@@ -27,15 +32,15 @@ const columns = [
   }
 ];
 
-const List = ({ registers }) => (
+const ItemsList = ({ items }) => (
   <Table
     columns={columns}
-    data={registers}
+    data={items}
   />
 );
 
-List.propTypes = {
-  registers: PropTypes.array.isRequired
+ItemsList.propTypes = {
+  items: PropTypes.array.isRequired
 };
 
-export default List;
+export default ItemsList;

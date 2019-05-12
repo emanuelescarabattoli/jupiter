@@ -6,7 +6,7 @@ import { graphql, compose } from "react-apollo";
 import Page from "../../components/Page";
 import ButtonFixed from "../../components/ButtonFixed";
 import { QUERY_REGISTER_LIST } from "../../queries/";
-import List from "./components/List/";
+import RegistersList from "./components/RegistersList";
 
 
 const adaptRegisters = registers => registers && registers.map(record => ({ ...record })) || [];
@@ -14,13 +14,13 @@ const adaptRegisters = registers => registers && registers.map(record => ({ ...r
 class Registers extends Component {
   render() {
     const {
-      loading,
+      loadingRegisters,
       registers
     } = this.props;
     return (
       <Page title="Registers">
-        <List
-          loading={loading}
+        <RegistersList
+          loading={loadingRegisters}
           registers={registers}
         />
         <ButtonFixed><i className="fas fa-plus" /></ButtonFixed>
@@ -30,7 +30,7 @@ class Registers extends Component {
 }
 
 Registers.propTypes = {
-  loading: PropTypes.bool.isRequired,
+  loadingRegisters: PropTypes.bool.isRequired,
   registers: PropTypes.array.isRequired
 };
 
@@ -41,7 +41,7 @@ export default compose(
       name: "listRegister",
       props: ({ listRegister }) => (
         {
-          loading: listRegister.loading,
+          loadingRegisters: listRegister.loading,
           registers: adaptRegisters(listRegister.listRegister)
         }
       )

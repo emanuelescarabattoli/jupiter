@@ -6,7 +6,7 @@ import style from "./style.scss";
 
 const MessageError = ({ children }) => (
   <div className={style.wrapper}>
-    <div>
+    <div className={style.icon}>
       <div>
         <i className="fas fa-times"></i>
       </div>

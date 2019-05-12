@@ -1,4 +1,4 @@
-.button {
+.buttonDefault {
   margin: 0px;
   padding: 0.5rem 1rem;
   border: none;
@@ -11,7 +11,7 @@
   transition: all 50ms linear;
 }
 
-.button:hover {
+.buttonDefault:hover {
   background-color: #ffffff;
   border-bottom: solid 2px #bbbbbb;
   transition: all 50ms linear;
@@ -19,25 +19,25 @@
   text-shadow: 0px 1px 0px rgba(0, 0, 0, 0);
 }
 
-.button:active {
+.buttonDefault:active {
   transition: all 50ms linear;
   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.6);
   text-shadow: 0px 1px 0px rgba(0, 0, 0, 0);
 }
 
-.button:disabled {
+.buttonDefault:disabled {
   background-color: #888888;
 }
 
-.button:disabled:hover {
+.buttonDefault:disabled:hover {
   background-color: #888888;
 }
 
-.button:disabled:active {
+.buttonDefault:disabled:active {
   background-color: #888888;
 }
 
-.light {
+.buttonLight {
   margin: 0px;
   padding: 0.5rem 1rem;
   border: none;
@@ -50,7 +50,7 @@
   transition: all 50ms linear;
 }
 
-.light:hover {
+.buttonLight:hover {
   background-color: #479bfc;
   border-bottom: solid 1px #1e3d61;
   transition: all 50ms linear;
@@ -59,22 +59,22 @@
 
 }
 
-.light:active {
+.buttonLight:active {
   transition: all 50ms linear;
   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2);
   text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.6);
 
 }
 
-.light:disabled {
+.buttonLight:disabled {
   background-color: #888888;
 }
 
-.light:disabled:hover {
+.buttonLight:disabled:hover {
   background-color: #888888;
 }
 
-.light:disabled:active {
+.buttonLight:disabled:active {
   background-color: #888888;
 }
 

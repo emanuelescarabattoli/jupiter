@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { stringOrPlaceholder } from "../../utils/";
+
 import style from "./style.scss";
 
 
@@ -18,7 +20,7 @@ const Box = ({ description, value, note }) => (
       </span>
     </div>
     <div className={style.content}>
-      <span>{note || "No note found"}</span>
+      <span>{stringOrPlaceholder(note, "No note found")}</span>
     </div>
   </div>
 );

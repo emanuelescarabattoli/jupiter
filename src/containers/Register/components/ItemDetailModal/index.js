@@ -6,12 +6,20 @@ import { Grid, Col } from "../../../../components/Grid";
 import Title from "../../../../components/Title";
 import AlignRight from "../../../../components/AlignRight";
 import Button from "../../../../components/Button";
-import MessageError from "../../../../components/MessageError";
 import FieldWrapper from "../../../../components/FieldWrapper";
 import Input from "../../../../components/Input";
+import { displayErrorMessage } from "../../../../utils/";
 
 
-const Item = ({ onSave, error, detail, onChange, isVisible }) => (
+const ItemDetailModal = (
+  {
+    detail,
+    error,
+    onChange,
+    onSave,
+    isVisible
+  }
+) => (
   <Modal isVisible={isVisible}>
     <ModalHeader>
       <Grid>
@@ -19,7 +27,7 @@ const Item = ({ onSave, error, detail, onChange, isVisible }) => (
           <Title
             subtitle="A register contains a list of items and a total"
           >
-            Register detail
+              Register detail
           </Title>
         </Col>
         <Col size={6}>
@@ -30,7 +38,7 @@ const Item = ({ onSave, error, detail, onChange, isVisible }) => (
       </Grid>
     </ModalHeader>
     <ModalBody>
-      {error && <MessageError>{error}</MessageError>}
+      {displayErrorMessage(error)}
       <Grid>
         <Col size={12}>
           <FieldWrapper>
@@ -80,8 +88,12 @@ const Item = ({ onSave, error, detail, onChange, isVisible }) => (
   </Modal>
 );
 
-Item.propTypes = {
-  items: PropTypes.array.isRequired
+ItemDetailModal.propTypes = {
+  detail: PropTypes.object.isRequired,
+  error: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
+  isVisible: PropTypes.bool.isRequired
 };
 
-export default Item;
+export default ItemDetailModal;

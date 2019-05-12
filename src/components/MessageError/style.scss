@@ -9,7 +9,7 @@
   grid-template-columns: 3.3rem 1fr;
 }
 
-.wrapper div:first-child {
+.icon {
   margin: 0px;
   padding: 0px;
   display: flex;
@@ -17,7 +17,7 @@
   height: 100%;
 }
 
-.wrapper div:first-child div {
+.icon div {
   margin: 0px;
   padding: 0px;
   font-size: 1.6rem;

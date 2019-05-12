@@ -5,13 +5,25 @@ import style from "./style.scss";
 
 
 const ShowHideArea = ({ isVisible, inLine, children }) => (
-  <div className={isVisible ? inLine ? style.visibleInLine : style.visibleBlock : style.hidden}>
+  <div
+    className={
+      (isVisible && inLine && style.visibleInLine) ||
+      (isVisible && style.visibleBlock) ||
+      style.hidden
+    }
+  >
     {children}
   </div>
 );
 
 ShowHideArea.propTypes = {
-  children: PropTypes.any.isRequired
+  children: PropTypes.any.isRequired,
+  isVisible: PropTypes.bool.isRequired,
+  inLine: PropTypes.bool
+};
+
+ShowHideArea.defaultProps = {
+  inLine: false
 };
 
 export default ShowHideArea;

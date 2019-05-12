@@ -13,7 +13,11 @@ const Title = ({ children, subtitle }) => (
 
 Title.propTypes = {
   children: PropTypes.any.isRequired,
-  subtitle: PropTypes.string.isRequired
+  subtitle: PropTypes.string
+};
+
+Title.defaultProps = {
+  subtitle: undefined
 };
 
 export default Title;

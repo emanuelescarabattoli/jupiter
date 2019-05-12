@@ -5,25 +5,34 @@ import style from "./style.scss";
 
 
 export const Modal = ({ children, isVisible }) => (
-  <div className={isVisible ? style.wrapper : style.hidden}>
+  <div className={isVisible ? style.wrapperVisible : style.wrapperHidden}>
     <div className={style.modal}>
       {children}
     </div>
   </div>
 );
 
+Modal.propTypes = {
+  children: PropTypes.any.isRequired,
+  isVisible: PropTypes.bool.isRequired
+};
+
 export const ModalHeader = ({ children }) => (
-  <div className={style.header}>
+  <div className={style.modalHeader}>
     {children}
   </div>
 );
+
+ModalHeader.propTypes = {
+  children: PropTypes.any.isRequired
+};
 
 export const ModalBody = ({ children }) => (
-  <div className={style.body}>
+  <div className={style.modalBody}>
     {children}
   </div>
 );
 
-Modal.propTypes = {
+ModalBody.propTypes = {
   children: PropTypes.any.isRequired
 };

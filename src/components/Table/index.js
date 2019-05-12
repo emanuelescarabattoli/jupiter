@@ -9,9 +9,11 @@ const Table = ({ columns, data }) => (
   <div className={style.wrapper}>
     <table>
       <thead>
-        {
-          columns.map(column => <th key={column.value} width={`${column.size}%`}>{column.label}</th>)
-        }
+        <tr>
+          {
+            columns.map(column => <th key={column.value} width={`${column.size}%`}>{column.label}</th>)
+          }
+        </tr>
       </thead>
       <tbody>
         {

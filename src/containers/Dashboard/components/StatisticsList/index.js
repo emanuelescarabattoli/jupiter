@@ -5,7 +5,7 @@ import Box from "../../../../components/Box";
 import { Grid, Col } from "../../../../components/Grid";
 
 
-const List = ({ statistics }) => (
+const StatisticsList = ({ statistics }) => (
   <Grid>
     {
       statistics.map(({ id, description, result, note }) => (
@@ -21,8 +21,8 @@ const List = ({ statistics }) => (
   </Grid>
 );
 
-List.propTypes = {
+StatisticsList.propTypes = {
   statistics: PropTypes.array.isRequired
 };
 
-export default List;
+export default StatisticsList;
