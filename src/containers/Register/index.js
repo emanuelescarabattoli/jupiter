@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { graphql, compose } from "react-apollo";
 
 import Page from "../../components/Page";
-import { MUTATION_REGISTER, QUERY_REGISTER_DETAIL } from "../../queries/";
+import { MUTATION_REGISTER, QUERY_REGISTER_DETAIL, QUERY_ITEM_DETAIL, MUTATION_ITEM } from "../../queries/";
 import Detail from "./components/Detail/";
 import { getErrorMessage } from "../../utils";
 import List from "./components/List/";
@@ -117,6 +117,28 @@ export default compose(
         loadingDetailRegister: detailRegister.loading
       }),
       options: props => ({
+        variables: {
+          id: props.match.params.id
+        }
+      })
+    }
+  ),
+  graphql(
+    MUTATION_ITEM,
+    {
+      name: "mutationItem"
+    }
+  ),
+  graphql(
+    QUERY_ITEM_DETAIL,
+    {
+      name: "detailItem",
+      skip: props => !props.match.params.id, // TODO
+      props: ({ detailItem }) => ({
+        register: detailItem.detailItem,
+        loadingDetailItem: detailItem.loading
+      }),
+      options: props => ({ // TODO
         variables: {
           id: props.match.params.id
         }
