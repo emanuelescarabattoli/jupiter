@@ -13,18 +13,18 @@ import Item from "./components/Item/";
 class Register extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      register: { id: "", description: "", note: "", itemSet: [] },
+      item: { id: "", description: "", note: "", period: "", amount: "" },
+      errorRegister: "",
+      errorItem: "",
+      modalVisible: false
+    };
     this.onChangeRegister = this.onChangeRegister.bind(this);
     this.onChangeItem = this.onChangeItem.bind(this);
     this.onSaveRegister = this.onSaveRegister.bind(this);
     this.onSaveItem = this.onSaveItem.bind(this);
     this.onClickNewItem = this.onClickNewItem.bind(this);
-    this.state = {
-      id: 0,
-      register: { id: "", description: "", note: "", itemSet: [] },
-      item: { id: "", description: "", note: "", period: "", amount: "" },
-      errorRegister: "",
-      modalVisible: false
-    };
   }
 
   componentDidMount() {
@@ -36,10 +36,10 @@ class Register extends Component {
   }
 
   updateState() {
-    if (this.props.register && !this.state.register.id) {
+    if (!this.state.register.id && this.props.register) {
       this.setState({ register: this.props.register });
     }
-    if (this.props.location.pathname.includes("item") && !this.state.modalVisible) {
+    if (!this.state.modalVisible && this.props.location.pathname.includes("item")) {
       this.setState({ modalVisible: true });
     }
   }
@@ -57,27 +57,15 @@ class Register extends Component {
   }
 
   onSaveRegister() {
-    this.saveRegister().then(result => {
-      if (result !== -1) {
-        this.props.history.push(`/register/${result}`);
-      }
-    });
+    this.saveRegister().then(registerId => registerId && this.props.history.push(`/register/${registerId}`));
   }
 
   onSaveItem() {
-    this.saveItem().then(result => {
-      if (result !== -1) {
-        this.props.history.push(`/register/${result}`);
-      }
-    });
+    this.saveItem().then(itemId => itemId && this.props.history.push(`/register/${this.state.register.id}`));
   }
 
   onClickNewItem() {
-    this.saveRegister().then(result => {
-      if (result) {
-        this.props.history.push(`/register/${result}/item`);
-      }
-    });
+    this.saveRegister().then(registerId => registerId && this.props.history.push(`/register/${registerId}/item`));
   }
 
   saveRegister() {
@@ -86,10 +74,9 @@ class Register extends Component {
       .then(result => {
         if (result.data.mutationRegister.errors.length) {
           this.setState({ errorRegister: getErrorMessage(result.data.mutationRegister.errors) });
-          return -1;
-        } else {
-          return result.data.mutationRegister.register.id;
+          return 0;
         }
+        return result.data.mutationRegister.register.id;
       });
   }
 
@@ -99,10 +86,9 @@ class Register extends Component {
       .then(result => {
         if (result.data.mutationItem.errors.length) {
           this.setState({ errorItem: getErrorMessage(result.data.mutationItem.errors) });
-          return -1;
-        } else {
-          return result.data.mutationItem.item.id;
+          return 0;
         }
+        return result.data.mutationItem.item.id;
       });
   }
 
@@ -117,11 +103,11 @@ class Register extends Component {
     return (
       <Page title="Register">
         <Detail
+          detail={register}
+          error={errorRegister}
           onChange={this.onChangeRegister}
           onSave={this.onSaveRegister}
           onClickNewItem={this.onClickNewItem}
-          detail={register}
-          error={errorRegister}
           isVisibleNewItemButton={register.id !== ""}
         />
         <List

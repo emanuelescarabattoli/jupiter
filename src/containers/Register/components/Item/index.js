@@ -53,6 +53,7 @@ const Item = ({ onSave, error, detail, onChange, isVisible }) => (
             <Input
               label="Date"
               name="date"
+              type="date"
               value={detail.date}
               onChange={onChange}
             />
