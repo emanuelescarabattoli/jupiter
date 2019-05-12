@@ -17,7 +17,9 @@ const App = () => (
       <PrivateRoute exact path="/" component={Dashboard} />
       <PrivateRoute exact path="/registers" component={Registers} />
       <PrivateRoute exact path="/register" component={Register} />
-      <PrivateRoute exact path="/register/:id" component={Register} />
+      <PrivateRoute exact path="/register/:registerId" component={Register} />
+      <PrivateRoute exact path="/register/:registerId/item" component={Register} />
+      <PrivateRoute exact path="/register/:registerId/item/:itemId" component={Register} />
     </BrowserRouter>
   </ApolloProvider>
 );

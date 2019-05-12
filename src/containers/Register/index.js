@@ -14,25 +14,45 @@ class Register extends Component {
   constructor(props) {
     super(props);
     this.onChangeRegister = this.onChangeRegister.bind(this);
+    this.onChangeItem = this.onChangeItem.bind(this);
     this.onSaveRegister = this.onSaveRegister.bind(this);
+    this.onSaveItem = this.onSaveItem.bind(this);
     this.onClickNewItem = this.onClickNewItem.bind(this);
     this.state = {
       id: 0,
       register: { id: "", description: "", note: "", itemSet: [] },
+      item: { id: "", description: "", note: "", period: "", amount: "" },
       errorRegister: "",
       modalVisible: false
     };
   }
 
-  componentDidUpdate(props) {
-    if (!props.register && this.props.register) {
+  componentDidMount() {
+    this.updateState();
+  }
+
+  componentDidUpdate() {
+    this.updateState();
+  }
+
+  updateState() {
+    if (this.props.register && !this.state.register.id) {
       this.setState({ register: this.props.register });
+    }
+    if (this.props.location.pathname.includes("item") && !this.state.modalVisible) {
+      this.setState({ modalVisible: true });
     }
   }
 
   onChangeRegister(event) {
     this.setState({
       register: { ...this.state.register, [event.target.name]: event.target.value }
+    });
+  }
+
+  onChangeItem(event) {
+    this.setState({
+      item: { ...this.state.item, [event.target.name]: event.target.value }
     });
   }
 
@@ -44,10 +64,18 @@ class Register extends Component {
     });
   }
 
+  onSaveItem() {
+    this.saveItem().then(result => {
+      if (result !== -1) {
+        this.props.history.push(`/register/${result}`);
+      }
+    });
+  }
+
   onClickNewItem() {
-    this.saveRegister(result => {
+    this.saveRegister().then(result => {
       if (result) {
-        this.setState({modalVisible: true});
+        this.props.history.push(`/register/${result}/item`);
       }
     });
   }
@@ -65,10 +93,26 @@ class Register extends Component {
       });
   }
 
+  saveItem() {
+    this.setState({ errorItem: "" });
+    return this.props.mutationItem({ variables: { ...this.state.item, register: this.state.register.id } })
+      .then(result => {
+        if (result.data.mutationItem.errors.length) {
+          this.setState({ errorItem: getErrorMessage(result.data.mutationItem.errors) });
+          return -1;
+        } else {
+          return result.data.mutationItem.item.id;
+        }
+      });
+  }
+
   render() {
     const {
       register,
-      errorRegister
+      errorRegister,
+      item,
+      errorItem,
+      modalVisible
     } = this.state;
     return (
       <Page title="Register">
@@ -83,7 +127,13 @@ class Register extends Component {
         <List
           items={register.itemSet}
         />
-        <Item />
+        <Item
+          detail={item}
+          error={errorItem}
+          onChange={this.onChangeItem}
+          onSave={this.onSaveItem}
+          isVisible={modalVisible}
+        />
       </Page>
     );
   }
@@ -111,14 +161,14 @@ export default compose(
     QUERY_REGISTER_DETAIL,
     {
       name: "detailRegister",
-      skip: props => !props.match.params.id,
+      skip: props => !props.match.params.registerId,
       props: ({ detailRegister }) => ({
         register: detailRegister.detailRegister,
         loadingDetailRegister: detailRegister.loading
       }),
       options: props => ({
         variables: {
-          id: props.match.params.id
+          id: props.match.params.registerId
         }
       })
     }
@@ -133,14 +183,14 @@ export default compose(
     QUERY_ITEM_DETAIL,
     {
       name: "detailItem",
-      skip: props => !props.match.params.id, // TODO
+      skip: props => !props.match.params.itemId,
       props: ({ detailItem }) => ({
-        register: detailItem.detailItem,
+        item: detailItem.detailItem,
         loadingDetailItem: detailItem.loading
       }),
-      options: props => ({ // TODO
+      options: props => ({
         variables: {
-          id: props.match.params.id
+          id: props.match.params.itemId
         }
       })
     }

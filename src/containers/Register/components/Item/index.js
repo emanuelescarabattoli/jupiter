@@ -11,8 +11,8 @@ import FieldWrapper from "../../../../components/FieldWrapper";
 import Input from "../../../../components/Input";
 
 
-const Item = ({ onSave, error, detail, onChange }) => (
-  <Modal>
+const Item = ({ onSave, error, detail, onChange, isVisible }) => (
+  <Modal isVisible={isVisible}>
     <ModalHeader>
       <Grid>
         <Col size={6}>
@@ -46,6 +46,30 @@ const Item = ({ onSave, error, detail, onChange }) => (
               label="Note"
               name="note"
               value={detail.note}
+              onChange={onChange}
+            />
+          </FieldWrapper>
+          <FieldWrapper>
+            <Input
+              label="Date"
+              name="date"
+              value={detail.date}
+              onChange={onChange}
+            />
+          </FieldWrapper>
+          <FieldWrapper>
+            <Input
+              label="Period"
+              name="period"
+              value={detail.period}
+              onChange={onChange}
+            />
+          </FieldWrapper>
+          <FieldWrapper>
+            <Input
+              label="amount"
+              name="amount"
+              value={detail.amount}
               onChange={onChange}
             />
           </FieldWrapper>

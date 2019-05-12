@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import style from "./style.scss";
 
 
-export const Modal = ({ children }) => (
-  <div className={style.wrapper}>
+export const Modal = ({ children, isVisible }) => (
+  <div className={isVisible ? style.wrapper : style.hidden}>
     <div className={style.modal}>
       {children}
     </div>
