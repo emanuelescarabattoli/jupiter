@@ -4,13 +4,14 @@ import PropTypes from "prop-types";
 import style from "./style.scss";
 
 
-const Button = ({ disabled, onClick, children, fullWidth, light }) => (
-  <button
-    className={`${light ? style.buttonLight : style.buttonDefault} ${fullWidth && style.fullWidth}`}
-    onClick={onClick}
-    disabled={disabled}
-  >
-    {children}
+const Button = ({ disabled, onClick, label, icon }) => (
+  <button className={style.button}>
+    <div className={style.buttonIcon}>
+      <i className="material-icons-outlined">{icon}</i>
+    </div>
+    <div className={style.buttonLabel}>
+      <span>{label}</span>
+    </div>
   </button>
 );
 
@@ -18,14 +19,10 @@ Button.propTypes = {
   onClick: PropTypes.func.isRequired,
   children: PropTypes.any.isRequired,
   disabled: PropTypes.bool,
-  fullWidth: PropTypes.bool,
-  light: PropTypes.bool,
 };
 
 Button.defaultProps = {
   disabled: false,
-  fullWidth: false,
-  light: false,
 };
 
 export default Button;

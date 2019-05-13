@@ -1,83 +1,31 @@
-.buttonDefault {
-  margin: 0px;
+.button {
+  margin-bottom: 0rem;
   padding: 0.5rem 1rem;
   border: none;
-  border-bottom: solid 2px #175092;
-  background-color: #2281ec;
-  border-radius: 4px;
-  color: #fafafa;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.6);
-  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.8);
-  transition: all 50ms linear;
+  background-color: #005bc4;
+  color: #f0f0f0;
+  display: inline-flex;
+  align-items: center;
 }
 
-.buttonDefault:hover {
-  background-color: #ffffff;
-  border-bottom: solid 2px #bbbbbb;
-  transition: all 50ms linear;
-  color: #2281ec;
-  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0);
+.button:hover {
+  background-color: #0067dd;
 }
 
-.buttonDefault:active {
-  transition: all 50ms linear;
-  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.6);
-  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0);
+.button:active {
+  background-color: #0077ff;
 }
 
-.buttonDefault:disabled {
-  background-color: #888888;
+.buttonIcon {
+  margin-right: 0.4rem;
+  display: flex;
+  align-items: center;
 }
 
-.buttonDefault:disabled:hover {
-  background-color: #888888;
+.buttonIcon *:first-child {
+  font-size: 1.2rem;
 }
 
-.buttonDefault:disabled:active {
-  background-color: #888888;
-}
-
-.buttonLight {
-  margin: 0px;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-bottom: solid 1px #0e315a;
-  background-color: #2281ec;
-  border-radius: 4px;
-  color: #fafafa;
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
-  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.8);
-  transition: all 50ms linear;
-}
-
-.buttonLight:hover {
-  background-color: #479bfc;
-  border-bottom: solid 1px #1e3d61;
-  transition: all 50ms linear;
-  color: #ffffff;
-  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.6);
-
-}
-
-.buttonLight:active {
-  transition: all 50ms linear;
-  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2);
-  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.6);
-
-}
-
-.buttonLight:disabled {
-  background-color: #888888;
-}
-
-.buttonLight:disabled:hover {
-  background-color: #888888;
-}
-
-.buttonLight:disabled:active {
-  background-color: #888888;
-}
-
-.fullWidth {
-  width: 100%;
+.buttonLabel {
+  text-transform: capitalize;
 }

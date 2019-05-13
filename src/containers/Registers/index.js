@@ -18,12 +18,11 @@ class Registers extends Component {
       registers
     } = this.props;
     return (
-      <Page title="Registers">
+      <Page title="Registers" icon="attach_money">
         <RegistersList
           loading={loadingRegisters}
           registers={registers}
         />
-        <ButtonFixed><i className="fas fa-plus" /></ButtonFixed>
       </Page>
     );
   }

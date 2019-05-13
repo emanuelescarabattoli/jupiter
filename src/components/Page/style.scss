@@ -1,53 +1,231 @@
 .wrapper {
-  margin: 0px auto;
-  padding: 3rem 0px;
-  width: 900px;
-}
-
-.menu {
   margin: 0px;
   padding: 0px;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  font-family: "Open Sans";
+  height: 100%;
 }
 
-.menu .logo {
-  margin: 0px 0px 1.5rem 1rem;
-  padding: 0px;
+.sidebar {
+  margin: 0px;
+  padding: 0rem;
+  color: #f0f0f0;
+  background-color: #33333388;
 }
 
-.menu span {
-  margin: 1rem 0px 0.5rem 1rem;
-  padding: 0px;
+.logo {
+  margin-bottom: 2rem;
+  padding: 1rem 1rem 0px 1rem;
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+}
+
+.logoIcon {
+  display: flex;
+  align-items: center;
+}
+
+.logoIcon *:first-child {
+  color: #22bbff;
+  font-size: 1.5rem;
+  transform: rotate(45deg)
+}
+
+
+.logoText {
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.menu > span {
   display: block;
-  color: #474d5c;
+  margin: 1.5rem 0rem 1rem 0rem;
+  padding: 0px 1rem;
   text-transform: uppercase;
-  font-size: 0.7em;
-  font-weight: bolder;
+  font-weight: 600;
+  font-size: 0.8rem;
+  opacity: 0.4;
 }
 
-.menu ul {
-  margin: 0px 0px 1.5rem 0px;
+.menuItems {
+  margin: 0px;
   padding: 0px;
   list-style-type: none;
 }
 
-.menu li {
-  margin: 0.2rem;
+.menuItems li {
+  margin: 0px;
   padding: 0.5rem 1rem;
-  background-color: #2281ec00;
-  transition: all 0.1s linear ;
+  font-size: 1.1em;
   cursor: pointer;
-  -moz-user-select: none;
-  user-select: none;
+  text-transform: capitalize;
+  display: grid;
+  grid-template-columns: 2.2rem 2fr 1fr;
 }
 
-.menu li:hover {
-  background-color: #2281ecff;
-  color: #ffffff;
-  border-radius: 4px;
-  transition: all 0.1s linear ;
+.menuItems li:hover {
+  background-color: #333333;
 }
 
-.title {
-  margin: 0px 0px 1.5rem 0px;
+.menuItems li:hover .menuItemActions {
+  visibility: visible;
+}
+
+.menu-items li:hover .menuItemIcon {
+  color: #f0f0f088;
+}
+
+.menuItemIcon {
+  color: #f0f0f055;
+  display: flex;
+  align-items: center;
+}
+
+.menuItemLabel {
+  display: flex;
+  align-items: center;
+}
+
+.menuItemActions {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  visibility: hidden;
+}
+
+.menuItemActions ul {
+  margin: 0px;
   padding: 0px;
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.menuItemActions ul li {
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f0f0f0aa;
+}
+
+.menuItemActions ul li:hover {
+  color: #f0f0f0ee;
+}
+
+.navbar {
+  margin: 0px;
+  padding: 0rem;
+  background-color: #005bc4;
+  color: #f0f0f0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.navbarLeft {
+  margin: 0px;
+  padding: 0px;
+}
+
+.navbarRight {
+  margin: 0px;
+  padding: 0px;
+  text-align: right
+}
+
+.navbarItem {
+  margin: 0px;
+  padding: 0.3rem 0.5rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.navbarItemIcon {
+  margin-right: 0.4rem;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.navbarItemIcon > * {
+  display: inline-block;
+  font-size: 1em;
+}
+
+.navbarItemLabel {
+  margin: 0px;
+  padding: 0px;
+  font-size: 0.9em;
+  text-transform: capitalize;
+}
+
+.navbarLink {
+  margin: 0px;
+  padding: 0.3rem 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  text-align: left;
+  cursor: pointer;
+}
+
+.navbarLinkIcon {
+  margin-right: 0.4rem;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.navbarLinkIcon > * {
+  display: inline-block;
+  font-size: 1em;
+}
+
+.navbarLinkLabel {
+  margin: 0px;
+  padding: 0px;
+  font-size: 0.9em;
+  text-transform: capitalize;
+}
+
+.navbarLink:hover {
+  background-color: #ffffff22;
+}
+
+.navbarButton {
+  margin: 0px;
+  padding: 0.3rem 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  text-align: left;
+  height: calc(100% - 0.6rem);
+  cursor: pointer;
+}
+
+.navbarButtonIcon {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.navbarButtonIcon > * {
+  display: inline-block;
+  font-size: 1em;
+}
+
+.navbarButtonLabel {
+  margin: 0px;
+  padding: 0px;
+  font-size: 0.9em;
+  text-transform: capitalize;
+}
+
+.navbarButton:hover {
+  background-color: #ffffff22;
 }

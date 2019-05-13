@@ -1,44 +1,135 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Grid, Col } from "../Grid";
-import Button from "../Button";
-
 import style from "./style.scss";
 
 
-const Page = ({ children, title }) => (
+const Menu = ({ items }) => (
+  <ul className={style.menuItems}>
+    {
+      items.map(item => (
+        <li key={item.id}>
+          <div className={style.menuItemIcon}>
+            <i className="material-icons-outlined">{item.icon}</i>
+          </div>
+          <div className={style.menuItemLabel}>
+            {item.label}
+          </div>
+          <div className={style.menuItemActions}>
+            <ul>
+              {
+                item.actions.map(action => (
+                  <li key={action.id}>
+                    <i className="material-icons-outlined">{action.icon}</i>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+);
+
+const NavbarItem = ({ icon, label }) => (
+  <div className={style.navbarItem}>
+    <div className={style.navbarItemIcon}>
+      <i className="material-icons-outlined">{icon}</i>
+    </div>
+    <div className={style.navbarItemLabel}>
+      <span>{label}</span>
+    </div>
+  </div>
+);
+
+const NavbarButton = ({ icon }) => (
+  <div className={style.navbarButton}>
+    <div className={style.navbarButtonIcon}>
+      <i className="material-icons-outlined">{icon}</i>
+    </div>
+  </div>
+);
+
+const NavbarLink = ({ icon, label }) => (
+  <div className={style.navbarLink}>
+    <div className={style.navbarLinkIcon}>
+      <i className="material-icons-outlined">{icon}</i>
+    </div>
+    <div className={style.navbarLinkLabel}>
+      <span>{label}</span>
+    </div>
+  </div>
+);
+
+const Page = ({ children, icon, title }) => (
   <div className={style.wrapper}>
-    <Grid>
-      <Col size={3}>
-        <div className={style.menu}>
-          <h3 className={style.logo}><i className="fas fa-chart-pie fa-spacing" />Jupiter</h3>
-          <Button fullWidth onClick={() => undefined}><i className="fas fa-plus fa-spacing" />New Register</Button>
-          <span>Menu</span>
-          <ul>
-            <li>
-              <i className="fas fa-tachometer-alt fa-spacing" />Dashboard
-            </li>
-            <li>
-              <i className="fas fa-table fa-spacing" />Registers
-            </li>
-            <li>
-              <i className="fas fa-calculator fa-spacing" />Statistics
-            </li>
-          </ul>
-          <span>Account</span>
-          <ul>
-            <li>
-              <i className="fas fa-sign-out-alt fa-spacing" />Logout
-            </li>
-          </ul>
+    <div className={style.sidebar}>
+      <div className={style.logo}>
+        <div className={style.logoIcon}>
+          <i className="fas fa-globe"></i>
         </div>
-      </Col>
-      <Col size={9}>
-        <h3 className={style.title}>{title}</h3>
-        {children}
-      </Col>
-    </Grid>
+        <div className={style.logoText}>
+          <span>jupiter</span>
+        </div>
+      </div>
+      <div className={style.menu}>
+        <span>main menu</span>
+        <Menu items={[
+          {
+            id: "dashboard",
+            icon: "dashboard",
+            label: "dashboard",
+            actions: []
+          },
+          {
+            id: "registers",
+            icon: "attach_money",
+            label: "registers",
+            actions: [
+              {
+                id: "registerAdd",
+                icon: "add"
+              }
+            ]
+          },
+          {
+            id: "statistics",
+            icon: "insert_chart",
+            label: "statistics",
+            actions: [
+              {
+                id: "statisticsAdd",
+                icon: "add"
+              }
+            ]
+          },
+        ]} />
+        <span>account</span>
+        <Menu items={[
+          {
+            id: "logout",
+            icon: "exit_to_app",
+            label: "logout",
+            actions: []
+          },
+        ]} />
+      </div>
+    </div>
+    <div>
+      <div className={style.navbar}>
+        <div className={style.navbarLeft}>
+          <NavbarItem icon={icon} label={title} />
+          <NavbarButton icon="refresh" />
+        </div>
+        <div className={style.navbarRight}>
+          <NavbarButton icon="notifications" />
+          <NavbarLink icon="account_circle" label="account" />
+          <NavbarLink icon="exit_to_app" label="logout" />
+        </div>
+      </div>
+      {children}
+    </div>
   </div>
 );
 
