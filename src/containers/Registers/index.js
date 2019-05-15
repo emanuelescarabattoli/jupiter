@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { graphql, compose } from "react-apollo";
 
 import Page from "../../components/Page";
-import ButtonFixed from "../../components/ButtonFixed";
 import { QUERY_REGISTER_LIST } from "../../queries/";
 import RegistersList from "./components/RegistersList";
 
@@ -18,7 +17,7 @@ class Registers extends Component {
       registers
     } = this.props;
     return (
-      <Page title="Registers" icon="attach_money">
+      <Page title="Registers" icon="toll">
         <RegistersList
           loading={loadingRegisters}
           registers={registers}

@@ -84,7 +84,7 @@ const Page = ({ children, icon, title }) => (
           },
           {
             id: "registers",
-            icon: "attach_money",
+            icon: "toll",
             label: "registers",
             actions: [
               {
@@ -121,6 +121,7 @@ const Page = ({ children, icon, title }) => (
         <div className={style.navbarLeft}>
           <NavbarItem icon={icon} label={title} />
           <NavbarButton icon="refresh" />
+          <NavbarButton icon="cloud_download" />
         </div>
         <div className={style.navbarRight}>
           <NavbarButton icon="notifications" />
@@ -128,7 +129,9 @@ const Page = ({ children, icon, title }) => (
           <NavbarLink icon="exit_to_app" label="logout" />
         </div>
       </div>
-      {children}
+      <div className={style.content}>
+        {children}
+      </div>
     </div>
   </div>
 );

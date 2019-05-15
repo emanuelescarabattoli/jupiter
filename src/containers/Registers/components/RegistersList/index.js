@@ -12,22 +12,34 @@ const columns = [
   {
     value: "id",
     label: "Id",
-    size: "5"
+    size: "10"
   },
   {
     value: "description",
     label: "Description",
-    size: "40"
+    size: "30"
   },
   {
     value: "note",
     label: "Note",
-    size: "50"
+    size: "40"
   },
   {
     value: "amount",
     label: "Amount",
-    size: "5"
+    size: "10"
+  },
+  {
+    actions: [
+      {
+        icon: "delete",
+      },
+      {
+        icon: "copy"
+      }
+    ],
+    label: "",
+    size: "20"
   }
 ];
 
@@ -39,7 +51,6 @@ const RegistersList = ({ registers }) => (
       </HeaderLeft>
       <HeaderRight>
         <ButtonsWrapper>
-          <Button icon="cloud_download" label="Export" />
           <Button icon="add" label="add" />
         </ButtonsWrapper>
       </HeaderRight>

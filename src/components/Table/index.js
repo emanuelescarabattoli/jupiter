@@ -17,10 +17,24 @@ const Table = ({ columns, data }) => (
       </thead>
       <tbody>
         {
-          data.map((record, index) => (
-            <tr key={index}>
+          data.map((record, recordIndex) => (
+            <tr key={recordIndex}>
               {
-                columns.map((column, index) => <td key={index}>{record[column.value] || "-"}</td>)
+                columns.map((column, columnIndex) => (
+                  <td key={columnIndex}>
+                    {
+                      column.actions ? (
+                        <div className={style.rowActions}>
+                          {
+                            column.actions.map((action, actionIndex) => <i key={actionIndex} className="material-icons-outlined">{action.icon}</i>)
+                          }
+                        </div>
+                      ) : (
+                        <span>{record[column.value] || "-"}</span>
+                      )
+                    }
+                  </td>
+                ))
               }
             </tr>
           ))

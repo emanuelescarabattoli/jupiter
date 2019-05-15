@@ -6,12 +6,8 @@ import style from "./style.scss";
 
 const Search = () => (
   <div className={style.wrapper}>
-    <div className={style.icon}>
-      <i className="material-icons-outlined">search</i>
-    </div>
-    <div className={style.input}>
-      <input />
-    </div>
+    <i className={`${style.icon} material-icons-outlined`}>search</i>
+    <input placeholder="" className={style.input}/>
   </div>
 );
 

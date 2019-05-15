@@ -229,3 +229,8 @@
 .navbarButton:hover {
   background-color: #ffffff22;
 }
+
+.content {
+  height: calc(#{100vh} - #{1rem} - #{1em});
+  overflow: auto;
+}

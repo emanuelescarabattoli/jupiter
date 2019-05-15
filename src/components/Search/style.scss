@@ -1,29 +1,26 @@
 .wrapper {
-  margin-bottom: 0rem;
-  padding: 0.5rem;
-  display: grid;
-  grid-template-columns: 1.6rem 1fr;
-  background-color: #f0f0f011;
+  display: flex;
 }
 
 .icon {
-  display: flex;
-  align-items: center;
-}
-
-.icon *:first-child {
   color: #f0f0f055;
-  font-size: 1.2rem;
+  padding: 0.35rem;
+  background-color: #f0f0f009;
 }
 
 .input {
-  display: flex;
-  align-items: center;
+  padding: 0.35rem;
+  background-color: #f0f0f009;
+  border: none;
+  transition: all 100ms linear;
+  color: #f0f0f0;
+  width: 60%;
 }
 
-.input > input {
-  border: none;
-  background-color: transparent;
-  color: #f0f0f0;
-  width: 100%;
+.input:placeholder-shown {
+  width: 30%;
+}
+
+.input:focus {
+  width: 60%;
 }
