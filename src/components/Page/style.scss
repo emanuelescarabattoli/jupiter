@@ -3,7 +3,6 @@
   padding: 0px;
   display: grid;
   grid-template-columns: 240px 1fr;
-  font-family: "Open Sans";
   height: 100%;
 }
 
@@ -11,7 +10,7 @@
   margin: 0px;
   padding: 0rem;
   color: #f0f0f0;
-  background-color: #33333388;
+  background-color: #33333333;
 }
 
 .logo {
@@ -75,7 +74,7 @@
   visibility: visible;
 }
 
-.menu-items li:hover .menuItemIcon {
+.menuItems li:hover .menuItemIcon {
   color: #f0f0f088;
 }
 

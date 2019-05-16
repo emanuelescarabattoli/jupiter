@@ -2,18 +2,23 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Table from "../../../../components/Table";
+import { Header, HeaderLeft, HeaderRight } from "../../../../components/Header";
+import Search from "../../../../components/Search";
+import Button from "../../../../components/Button";
+import ButtonsWrapper from "../../../../components/ButtonsWrapper";
+import ShowHideArea from "../../../../components/ShowHideArea";
 
 
 const columns = [
   {
     value: "id",
     label: "Id",
-    size: "5"
+    size: "10"
   },
   {
     value: "date",
     label: "Date",
-    size: "40"
+    size: "20"
   },
   {
     value: "description",
@@ -23,20 +28,46 @@ const columns = [
   {
     value: "period",
     label: "Period",
-    size: "50"
+    size: "10"
   },
   {
     value: "amount",
     label: "Amount",
-    size: "5"
+    size: "10"
+  },
+  {
+    actions: [
+      {
+        icon: "delete",
+      },
+      {
+        icon: "copy"
+      }
+    ],
+    label: "",
+    size: "20"
   }
 ];
 
-const ItemsList = ({ items }) => (
-  <Table
-    columns={columns}
-    data={items}
-  />
+const ItemsList = ({ items, onClickAdd, isVisibleAdd }) => (
+  <>
+    <Header>
+      <HeaderLeft>
+        <Search />
+      </HeaderLeft>
+      <HeaderRight>
+        <ButtonsWrapper>
+          <ShowHideArea inLine isVisible={isVisibleAdd}>
+            <Button label="Add" icon="add" onClick={onClickAdd} />
+          </ShowHideArea>
+        </ButtonsWrapper>
+      </HeaderRight>
+    </Header>
+    <Table
+      columns={columns}
+      data={items}
+    />
+  </>
 );
 
 ItemsList.propTypes = {

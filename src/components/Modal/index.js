@@ -27,6 +27,26 @@ ModalHeader.propTypes = {
   children: PropTypes.any.isRequired
 };
 
+export const ModalHeaderLeft = ({ children }) => (
+  <div className={style.modalHeaderLeft}>
+    <h4>{children}</h4>
+  </div>
+);
+
+ModalHeader.propTypes = {
+  children: PropTypes.any.isRequired
+};
+
+export const ModalHeaderRight = ({ children }) => (
+  <div className={style.modalHeaderRight}>
+    {children}
+  </div>
+);
+
+ModalHeader.propTypes = {
+  children: PropTypes.any.isRequired
+};
+
 export const ModalBody = ({ children }) => (
   <div className={style.modalBody}>
     {children}

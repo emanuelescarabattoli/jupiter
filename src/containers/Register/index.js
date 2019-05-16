@@ -29,7 +29,7 @@ class Register extends Component {
     this.onChangeItem = this.onChangeItem.bind(this);
     this.onSaveRegister = this.onSaveRegister.bind(this);
     this.onSaveItem = this.onSaveItem.bind(this);
-    this.onClickNewItem = this.onClickNewItem.bind(this);
+    this.onClickAddItem = this.onClickAddItem.bind(this);
   }
 
   componentDidMount() {
@@ -69,7 +69,7 @@ class Register extends Component {
     this.saveItem().then(itemId => itemId && this.props.history.push(`/register/${this.state.register.id}`));
   }
 
-  onClickNewItem() {
+  onClickAddItem() {
     this.saveRegister().then(registerId => registerId && this.props.history.push(`/register/${registerId}/item`));
   }
 
@@ -106,17 +106,17 @@ class Register extends Component {
       modalVisible
     } = this.state;
     return (
-      <Page title="Register">
+      <Page title="Register" icon="toll">
         <RegisterDetail
           detail={register}
           error={errorRegister}
           onChange={this.onChangeRegister}
           onSave={this.onSaveRegister}
-          onClickNewItem={this.onClickNewItem}
-          isVisibleNewItemButton={register.id !== ""}
         />
         <ItemsList
           items={register.itemSet}
+          onClickAdd={this.onClickAddItem}
+          isVisibleAdd={register.id !== ""}
         />
         <ItemDetailModal
           detail={item}

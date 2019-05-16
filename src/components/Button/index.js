@@ -5,7 +5,7 @@ import style from "./style.scss";
 
 
 const Button = ({ disabled, onClick, label, icon }) => (
-  <button className={style.button}>
+  <button className={style.button} onClick={onClick}>
     <div className={style.buttonIcon}>
       <i className="material-icons-outlined">{icon}</i>
     </div>

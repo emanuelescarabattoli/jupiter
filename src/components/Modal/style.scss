@@ -10,30 +10,53 @@
   left: 0px;
   width: 100%;
   height: 100%;
-  background-color: #333333ee;
+  background-color: #222222bb;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .modal {  
-  margin: 0px 0px 2rem 0px;
+  margin: 0px 0px 0rem 0px;
   padding: 0rem;
-  width: 50%;
-  max-height: 80%;
-  background-color: #f0f0f0;
-  color: #333333;
-  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.8);
-  border-radius: 2px;
-  overflow: auto;
+  width: 60%;
+  height: 80vh;
+  background-color: #222222;
+  border: solid 1px #f0f0f011;
+  box-shadow: 0px 0px 10px 0px #00000044;
 }
 
 .modalHeader {
   margin: 0px;
-  padding: 1.6rem 1.6rem 0px 1.6rem;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: solid 1px #f0f0f011;
+  
+}
+
+.modalHeaderLeft {
+  margin: 0px;
+  padding: 0rem;
+  display: flex;
+  align-items: center;
+}
+
+.modalHeaderLeft h4 {
+  margin: 0px;
+  padding: 0rem;
+  color: #fefefe;
+}
+
+.modalHeaderRight {
+  margin: 0px;
+  padding: 0rem;
+  text-align: right;
 }
 
 .modalBody {
   margin: 0px;
-  padding: 1.6rem;
+  padding: 1rem;
+  overflow: auto;
+  height: calc(#{80vh} - #{5.3rem} - #{1em});
 }
