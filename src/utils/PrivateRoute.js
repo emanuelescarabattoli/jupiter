@@ -1,9 +1,8 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
 import PropTypes from "prop-types";
-
 
 const QUERY = gql`
   {
@@ -13,26 +12,23 @@ const QUERY = gql`
   }
 `;
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Query query={QUERY}>
-    {({ loading, error, data }) => {
-      if (loading) return <div />;
-      return (
-        <Route
-          {...rest}
-          render={props => {
-            if (error || data.me.username === "") {
-              return <Redirect to="/login" />;
-            }
-            return <Component {...props} />;
-          }}
-        />
-      );
-    }}
-  </Query>
-);
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  const { loading, error, data } = useQuery(QUERY);
+  if (loading) return <div />;
+  return (
+    <Route
+      {...rest}
+      render={props => {
+        if (error || !data.me || data.me.username === "") {
+          return <Redirect to="/login" />;
+        }
+        return <Component {...props} />;
+      }}
+    />
+  );
+};
 
-PrivateRoute.propTypes =  {
+PrivateRoute.propTypes = {
   component: PropTypes.any.isRequired
 };
 

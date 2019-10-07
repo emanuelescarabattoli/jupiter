@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 import style from "./style.scss";
 
-
 export const Grid = ({ children }) => <div className={style.grid}>{children}</div>;
 
 Grid.propTypes = {

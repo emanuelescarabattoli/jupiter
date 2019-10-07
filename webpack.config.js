@@ -28,8 +28,9 @@ module.exports = env => ({
           {
             loader: "css-loader",
             options: {
-              modules: true,
-              localIdentName: "[name]_[local]_[hash:base64]"
+              modules: {
+                localIdentName: "[name]_[local]_[hash:base64]"
+              }
             }
           },
           {

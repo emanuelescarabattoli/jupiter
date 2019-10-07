@@ -1,6 +1,5 @@
 import gql from "graphql-tag";
 
-
 export const QUERY_STATISTICS_LIST = gql`
   {
     listStatistics {
@@ -56,7 +55,7 @@ export const MUTATION_REGISTER = gql`
     }
   }
   `;
-  
+
 export const QUERY_ITEM_DETAIL = gql`
     query detailItem($id: Int) {
       detailItem(id: id) {

@@ -2,7 +2,6 @@ import React from "react";
 
 import MessageError from "../components/MessageError/";
 
-
 export const getErrorMessage = errors => errors && errors.reduce((message, error) => message ? `; ${capitalize(error.filed)}: ${arrayToString(error.messages)}` : `${capitalize(error.field)}: ${arrayToString(error.messages)}`, "") || "";
 
 export const arrayToString = array => array && array.reduce((total, element) => total ? `, ${element}` : element, "") || "";
