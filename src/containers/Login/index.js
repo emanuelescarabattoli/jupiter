@@ -8,7 +8,7 @@ import Form from "./components/Form";
 const Login = ({ history }) => {
   const [input, setInput] = useState({ username: "", password: "" });
   const [doLogin, { loading, error }] = useMutation(MUTATION_TOKEN_AUTH);
-  const onSubmit = () => console.log(input) || doLogin({ variables: { username: input.username, password: input.password } }).then(data => {
+  const onSubmit = () => doLogin({ variables: { username: input.username, password: input.password } }).then(data => {
     localStorage.setItem("token", data.data.tokenAuth.token);
     history.push("/");
   });
