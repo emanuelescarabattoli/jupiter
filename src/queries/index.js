@@ -82,3 +82,11 @@ export const MUTATION_ITEM = gql`
     }
   }
 `;
+
+export const MUTATION_TOKEN_AUTH = gql`
+  mutation tokenAuth($username: String!, $password: String!) {
+    tokenAuth(username: $username, password: $password) {
+      token
+    }
+  }
+`;
