@@ -1,0 +1,42 @@
+.container {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+}
+
+.sidebar {
+  height: 100vh;
+}
+
+.menu {
+  margin: 0;
+  padding: 0.25rem;
+  list-style-type: none;
+}
+
+.item {
+  padding: 0.25rem;
+}
+
+.item > a {
+  text-decoration: none;
+  color: #00ff00;
+}
+
+.item > a:focus,
+.item > a:active,
+.item > a:hover {
+  color: #77ff77;
+  outline: none;
+}
+
+.header {
+  padding: 0.5rem 0.25rem 0.25rem 0.5rem;
+}
+
+.title {
+  text-transform: capitalize;
+}
+
+.content {
+  padding: 0;
+}

@@ -1,7 +1,5 @@
 import React from "react";
 
-const Dashboard = () => (
-  <span>Dashboard</span>
-);
+const Dashboard = () => <></>;
 
 export default Dashboard;
