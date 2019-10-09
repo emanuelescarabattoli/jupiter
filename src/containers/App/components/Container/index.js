@@ -22,7 +22,7 @@ const Container = ({ children, location }) => (
     <div>
       <div className={style.header}>
         <span className={style.title}>
-          {location.pathname.substr(1) || "Dashboard"}
+          {location.pathname.substr(1).replace("/", " > ") || "Dashboard"}
         </span>
       </div>
       <div className={style.content}>

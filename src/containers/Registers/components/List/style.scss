@@ -8,14 +8,13 @@
   padding: 0.25rem;
 }
 
-.item > a {
-  text-decoration: none;
+.action {
+  display: inline-block;
+  margin-right: 0.5rem;
   color: #00ff00;
+  cursor: pointer;
 }
 
-.item > a:focus,
-.item > a:active,
-.item > a:hover {
+.action:hover {
   color: #77ff77;
-  outline: none;
 }
