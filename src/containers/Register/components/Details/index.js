@@ -2,9 +2,10 @@ import React from "react";
 
 import style from "./style.scss";
 
-const Details = ({ register }) => (
+const Details = ({ values, onChange, onSubmit }) => (
   <div className={style.wrapper}>
-    foo
+    <input className={style.input} type="text" name="description" value={values.description} onChange={onChange} />
+    <input className={style.input} type="text" name="note" value={values.note} onChange={onChange} />
   </div>
 );
 

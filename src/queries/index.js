@@ -30,7 +30,7 @@ export const QUERY_REGISTER_DETAIL = gql`
       description
       note
       amount
-      itemSet {
+      registerrowSet {
         id
         date
         description
