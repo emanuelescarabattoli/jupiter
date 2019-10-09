@@ -17,7 +17,8 @@ const App = () => (
         <Route exact path="/login" component={Login} />
         <PrivateRoute exact path="/" component={Dashboard} />
         <PrivateRoute exact path="/registers" component={Registers} />
-        <PrivateRoute exact path="/registers/:registerId" component={Register} />
+        <PrivateRoute exact path="/register/:registerId" component={Register} />
+        <PrivateRoute exact path="/register" component={Register} />
       </Container>
     </BrowserRouter>
   </ApolloProvider>
