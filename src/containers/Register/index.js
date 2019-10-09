@@ -3,6 +3,8 @@ import { withRouter } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 
 import Details from "./components/Details";
+import ErrorMessage from "../../components/ErrorMessage";
+import LoadingMessage from "../../components/LoadingMessage";
 import { QUERY_REGISTER_DETAIL, MUTATION_REGISTER, QUERY_REGISTER_LIST } from "../../queries";
 
 const getIdByParams = match => match && match.params && match.params.registerId || undefined;
@@ -12,7 +14,7 @@ const Register = ({ match, history }) => {
 
   const registerQuery = useQuery(QUERY_REGISTER_DETAIL, { variables: { id }, skip: !id });
   const [saveRegister, registerMutation] = useMutation(MUTATION_REGISTER);
-  const [input, setInput] = useState({ description: "", note: "" });
+  const [input, setInput] = useState({ description: "", note: "", registerrowSet: [] });
 
   useEffect(() => registerQuery.data && registerQuery.data.detailRegister && setInput(registerQuery.data.detailRegister), [registerQuery]);
 
@@ -30,8 +32,10 @@ const Register = ({ match, history }) => {
           }
         ]
       }
-    ).then(() => {
-      history.push("/registers");
+    ).then(data => {
+      if (!data.data.mutationRegister.errors.length) {
+        history.push("/registers");
+      }
     });
   };
 
@@ -39,8 +43,8 @@ const Register = ({ match, history }) => {
 
   return (
     <>
-      {registerQuery.loading || registerMutation.data && <span>Loading...</span>}
-      {registerQuery.error || registerMutation.error && <span>Error!</span>}
+      {registerQuery.loading || registerMutation.loading && <LoadingMessage />}
+      {registerQuery.error || registerMutation.error || registerMutation.data && registerMutation.data.mutationRegister.errors && registerMutation.data.mutationRegister.errors.length && <ErrorMessage />}
       <Details values={input} onChange={onChange} onSubmit={onSubmit} />
     </>
   );

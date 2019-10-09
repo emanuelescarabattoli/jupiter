@@ -3,6 +3,8 @@ import { withRouter } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 
 import List from "./components/List";
+import ErrorMessage from "../../components/ErrorMessage";
+import LoadingMessage from "../../components/LoadingMessage";
 import { QUERY_REGISTER_LIST } from "../../queries";
 
 const Registers = ({ history }) => {
@@ -14,8 +16,8 @@ const Registers = ({ history }) => {
 
   return (
     <>
-      {loading && <span>Loading...</span>}
-      {error && <span>Error!</span>}
+      {loading && <LoadingMessage />}
+      {error && <ErrorMessage />}
       {data && <List registers={data.listRegister} onClickEdit={onClickEdit} onClickNew={onClickNew} />}
     </>
   );

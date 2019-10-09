@@ -15,14 +15,14 @@
   cursor: pointer;
 }
 
+.action:hover {
+  color: #77ff77;
+}
+
 .button {
   padding-left: 0.5rem;
   display: inline-block;
   margin-right: 0.5rem;
   color: #00ff00;
   cursor: pointer;
-}
-
-.action:hover {
-  color: #77ff77;
 }
