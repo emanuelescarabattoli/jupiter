@@ -10,7 +10,7 @@ import { QUERY_REGISTER_LIST } from "../../queries";
 const Registers = ({ history }) => {
   const { loading, error, data } = useQuery(QUERY_REGISTER_LIST);
 
-  const onClickEdit = id => history.push(`register/${id}`);
+  const onClickShow = id => history.push(`register/${id}`);
 
   const onClickNew = () => history.push("register");
 
@@ -18,7 +18,7 @@ const Registers = ({ history }) => {
     <>
       {loading && <LoadingMessage />}
       {error && <ErrorMessage />}
-      {data && <List registers={data.listRegister} onClickEdit={onClickEdit} onClickNew={onClickNew} />}
+      {data && <List registers={data.listRegister} onClickShow={onClickShow} onClickNew={onClickNew} />}
     </>
   );
 };

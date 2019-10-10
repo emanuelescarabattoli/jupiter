@@ -15,6 +15,7 @@ const Register = ({ match, history }) => {
   const registerQuery = useQuery(QUERY_REGISTER_DETAIL, { variables: { id }, skip: !id });
   const [saveRegister, registerMutation] = useMutation(MUTATION_REGISTER);
   const [input, setInput] = useState({ description: "", note: "", registerrowSet: [] });
+  const [isOnEdit, setIsOnEdit] = useState(false);
 
   useEffect(() => registerQuery.data && registerQuery.data.detailRegister && setInput(registerQuery.data.detailRegister), [registerQuery]);
 
@@ -34,9 +35,13 @@ const Register = ({ match, history }) => {
       }
     ).then(data => {
       if (!data.data.mutationRegister.errors.length) {
-        history.push("/registers");
+        setIsOnEdit(false);
       }
     });
+  };
+
+  const onClickEdit = () => {
+    setIsOnEdit(true);
   };
 
   const onChange = event => setInput({ ...input, [event.target.name]: event.target.value });
@@ -44,8 +49,8 @@ const Register = ({ match, history }) => {
   return (
     <>
       {registerQuery.loading || registerMutation.loading && <LoadingMessage />}
-      {registerQuery.error || registerMutation.error || registerMutation.data && registerMutation.data.mutationRegister.errors && registerMutation.data.mutationRegister.errors.length && <ErrorMessage />}
-      <Details values={input} onChange={onChange} onSubmit={onSubmit} />
+      {registerQuery.error || registerMutation.error || registerMutation.data && registerMutation.data.mutationRegister.errors && registerMutation.data.mutationRegister.errors.length > 0 && <ErrorMessage />}
+      <Details values={input} onChange={onChange} onSubmit={onSubmit} isOnEdit={isOnEdit} onClickEdit={onClickEdit}/>
     </>
   );
 };
