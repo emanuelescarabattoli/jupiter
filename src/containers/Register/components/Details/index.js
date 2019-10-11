@@ -33,11 +33,13 @@ const Details = ({
             {
               !isOnEdit && !isOnEditRow && <span className={style.action} onClick={() => onClickEditRow(row.id)}>Edit</span>
             }
-            <span>{row.description}</span>
+            <span>{row.description}</span>{" "}
+            <span>{row.amount}</span>
           </li>
         ))
       }
     </ul>
+    <span>{values.amount}</span>
     {
       isOnEditRow &&
         <div className={style.wrapper}>

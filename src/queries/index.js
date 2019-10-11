@@ -4,7 +4,6 @@ export const QUERY_STATISTICS_LIST = gql`
   {
     listStatistics {
       id
-      formula
       description
       note
       result
@@ -42,6 +41,17 @@ export const QUERY_REGISTER_DETAIL = gql`
   }
 `;
 
+export const QUERY_STATISTICS_DETAIL = gql`
+  query detailStatistics($id: Int) {
+    detailStatistics(id: $id) {
+      id
+      description
+      note
+      result
+    }
+  }
+`;
+
 export const MUTATION_REGISTER = gql`
   mutation mutationRegister($id: ID, $description: String!, $note: String) {
     mutationRegister(input: {id: $id, description: $description, note: $note}) {
@@ -54,7 +64,21 @@ export const MUTATION_REGISTER = gql`
       }
     }
   }
-  `;
+`;
+
+export const MUTATION_STATISTICS = gql`
+  mutation mutationStatistics($id: ID, $description: String!, $note: String) {
+    mutationStatistics(input: {id: $id, description: $description, note: $note}) {
+      statistics {
+        id
+      }
+      errors {
+        field
+        messages
+      }
+    }
+  }
+`;
 
 export const QUERY_REGISTER_ROW_DETAIL = gql`
     query detailRegisterRow($id: Int) {
