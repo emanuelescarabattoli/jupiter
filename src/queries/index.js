@@ -56,9 +56,9 @@ export const MUTATION_REGISTER = gql`
   }
   `;
 
-export const QUERY_ITEM_DETAIL = gql`
-    query detailItem($id: Int) {
-      detailItem(id: id) {
+export const QUERY_REGISTER_ROW_DETAIL = gql`
+    query detailRegisterRow($id: Int) {
+      detailRegisterRow(id: $id) {
         id
         date
         description
@@ -69,10 +69,10 @@ export const QUERY_ITEM_DETAIL = gql`
     }
   `;
 
-export const MUTATION_ITEM = gql`
-  mutation mutationItem($id: ID, $date: Date!, $description: String!, $period: String!, $amount: Float!, $note: String, $register: ID!) {
-    mutationItem(input: {id: $id, date: $date, description: $description, period: $period, amount: $amount, note: $note, register: $register}) {
-      item {
+export const MUTATION_REGISTER_ROW = gql`
+  mutation mutationRegisterRow($id: ID, $date: Date!, $description: String!, $period: String!, $amount: Float!, $note: String, $register: ID!) {
+    mutationRegisterRow(input: {id: $id, date: $date, description: $description, period: $period, amount: $amount, note: $note, register: $register}) {
+      registerRow {
         id
       }
       errors {
