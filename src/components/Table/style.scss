@@ -1,0 +1,32 @@
+.table {
+  width: 100%;
+}
+
+.tableHeader {
+
+}
+
+.tableBody {
+
+}
+
+.tableRow {
+
+}
+
+.tableCell {
+  padding: 1rem;
+  border-bottom: dashed 1px #00ff00;
+}
+
+.tableFooter {
+
+}
+
+.tableBody > .tableRow:last-child > .tableCell {
+  border-bottom: none;
+}
+
+.tableFooter > .tableRow:last-child > .tableCell {
+  border-bottom: none;
+}

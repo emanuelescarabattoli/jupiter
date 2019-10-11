@@ -1,21 +1,35 @@
 import React from "react";
 
-import style from "./style.scss";
+import { Card, CardHeader, CardTable } from "../../../../components/Card";
+import { Table, TableHeader, TableBody, TableRow, TableCell } from "../../../../components/Table";
+import Button from "../../../../components/Button";
 
 const List = ({ registers, onClickShow, onClickNew }) => (
-  <>
-    <span className={style.button} onClick={onClickNew}>New</span>
-    <ul className={style.list}>
-      {
-        registers.map(register => (
-          <li className={style.item} key={register.id}>
-            <span className={style.action} onClick={() => onClickShow(register.id)}>Show</span>
-            <span>{register.description}</span>
-          </li>
-        ))
-      }
-    </ul>
-  </>
+  <Card>
+    <CardHeader>
+      <Button onClick={onClickNew}>New</Button>
+    </CardHeader>
+    <CardTable>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableCell>Action</TableCell>
+            <TableCell>Description</TableCell>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {
+            registers.map(register => (
+              <TableRow key={register.id}>
+                <TableCell><Button onClick={() => onClickShow(register.id)}>Show</Button></TableCell>
+                <TableCell>{register.description}</TableCell>
+              </TableRow>
+            ))
+          }
+        </TableBody>
+      </Table>
+    </CardTable>
+  </Card>
 );
 
 export default List;

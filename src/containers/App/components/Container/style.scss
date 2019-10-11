@@ -1,42 +1,41 @@
 .container {
   display: grid;
-  grid-template-columns: 110px 1fr;
+  grid-template-columns: 300px 1fr;
+  padding: 0.5rem;
 }
 
 .sidebar {
-  height: 100vh;
-}
-
-.menu {
-  margin: 0;
-  padding: 0.25rem;
-  list-style-type: none;
-}
-
-.item {
-  padding: 0.25rem;
-}
-
-.item > a {
-  text-decoration: none;
-  color: #00ff00;
-}
-
-.item > a:focus,
-.item > a:active,
-.item > a:hover {
-  color: #77ff77;
-  outline: none;
+  padding: 0.5rem;
 }
 
 .header {
-  padding: 0.5rem 0.25rem 0.25rem 0.5rem;
+  padding: 0.5rem;
+}
+
+.content {
+  padding: 0.5rem;
 }
 
 .title {
   text-transform: capitalize;
 }
 
-.content {
+.menu {
+  margin: 0;
   padding: 0;
+  list-style-type: none;
+}
+
+.menuItem + .menuItem {
+ margin-top: 1rem;
+}
+
+.menuItem > a {
+  display: inline-block;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: dashed 1px #00ff00;
+  background-color: transparent;
+  color: #00ff00;
+  font-family: "Share Tech Mono";
 }

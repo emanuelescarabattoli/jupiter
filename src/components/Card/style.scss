@@ -1,0 +1,25 @@
+.card {
+  border: dashed 1px #00ff00;
+}
+
+.card + .card {
+  margin-top: 1rem;
+}
+
+.cardHeader {
+  padding: 1rem;
+  border-bottom: dashed 1px #00ff00;
+}
+
+.cardBody {
+  padding: 1rem;
+}
+
+.cardTable {
+  padding: 0;
+}
+
+.cardFooter {
+  padding: 1rem;
+  border-top: dashed 1px #00ff00;
+}
