@@ -4,7 +4,6 @@ import { ApolloProvider } from "@apollo/react-hooks";
 
 import client from "../../client";
 import PrivateRoute from "../../utils/PrivateRoute";
-import Dashboard from "../Dashboard";
 import Registers from "../Registers";
 import Register from "../Register";
 import Statistics from "../Statistics";
@@ -17,12 +16,13 @@ const App = () => (
     <BrowserRouter>
       <Container>
         <Route exact path="/login" component={Login} />
-        <PrivateRoute exact path="/" component={Dashboard} />
+        <PrivateRoute exact path="/" component={Registers} />
         <PrivateRoute exact path="/registers" component={Registers} />
         <PrivateRoute exact path="/register/:registerId" component={Register} />
         <PrivateRoute exact path="/register" component={Register} />
         <PrivateRoute exact path="/statistics" component={Statistics} />
         <PrivateRoute exact path="/statistic" component={Statistic} />
+        <PrivateRoute exact path="/statistic/:statisticId" component={Statistic} />
       </Container>
     </BrowserRouter>
   </ApolloProvider>

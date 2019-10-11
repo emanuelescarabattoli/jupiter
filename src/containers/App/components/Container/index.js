@@ -9,9 +9,6 @@ const Container = ({ children, location }) => (
     <div className={style.sidebar}>
       <ul className={style.menu}>
         <li className={style.item}>
-          <Link to="/">Dashboard</Link>
-        </li>
-        <li className={style.item}>
           <Link to="/registers">Registers</Link>
         </li>
         <li className={style.item}>
@@ -22,7 +19,7 @@ const Container = ({ children, location }) => (
     <div>
       <div className={style.header}>
         <span className={style.title}>
-          {location.pathname.substr(1).replace("/", " > ") || "Dashboard"}
+          {location.pathname.substr(1).replace("/", " > ") || "Registers"}
         </span>
       </div>
       <div className={style.content}>
