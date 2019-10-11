@@ -66,6 +66,24 @@ export const MUTATION_REGISTER = gql`
   }
 `;
 
+
+export const MUTATION_REGISTER_DELETE = gql`
+  mutation mutationDeleteRegister($pk: Int!) {
+    mutationDeleteRegister(pk: $pk) {
+      success
+    }
+  }
+`;
+
+
+export const MUTATION_REGISTER_ROW_DELETE = gql`
+  mutation mutationDeleteRegisterRow($pk: Int!) {
+    mutationDeleteRegisterRow(pk: $pk) {
+      success
+    }
+  }
+`;
+
 export const MUTATION_STATISTICS = gql`
   mutation mutationStatistics($id: ID, $description: String!, $note: String) {
     mutationStatistics(input: {id: $id, description: $description, note: $note}) {

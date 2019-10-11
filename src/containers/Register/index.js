@@ -10,7 +10,8 @@ import {
   MUTATION_REGISTER,
   QUERY_REGISTER_LIST,
   QUERY_REGISTER_ROW_DETAIL,
-  MUTATION_REGISTER_ROW
+  MUTATION_REGISTER_ROW,
+  MUTATION_REGISTER_ROW_DELETE
 } from "../../queries";
 
 const getIdByParams = match => match && match.params && match.params.registerId || undefined;
@@ -27,6 +28,9 @@ const Register = ({ match }) => {
   const [saveRegisterRow, registerRowMutation] = useMutation(MUTATION_REGISTER_ROW);
   const [inputRow, setInputRow] = useState({ id: undefined, date: "", description: "", period: "", amount: "", note: "" });
   const [isOnEditRegisterRow, setIsOnEditRegisterRow] = useState(false);
+
+  const [deleteRegisterRow, deleteRegisterRowMutation] = useMutation(MUTATION_REGISTER_ROW_DELETE);
+
 
   useEffect(() => registerQuery.data && registerQuery.data.detailRegister && setInput(registerQuery.data.detailRegister), [registerQuery]);
 
@@ -93,6 +97,12 @@ const Register = ({ match }) => {
     setIsOnEditRegisterRow(true);
   };
 
+  const onClickDeleteRow = rowId => {
+    if(confirm("Are you sure?")){
+      deleteRegisterRow({ variables: { pk: rowId }, refetchQueries: [{ query: QUERY_REGISTER_DETAIL, variables: { id } }] });
+    }
+  };
+
   const onChange = event => setInput({ ...input, [event.target.name]: event.target.value });
 
   const onChangeRow = event => setInputRow({ ...inputRow, [event.target.name]: event.target.value });
@@ -139,6 +149,7 @@ const Register = ({ match }) => {
         isOnEditRow={isOnEditRegisterRow}
         onClickEditRow={onClickEditRow}
         onClickNewRow={onClickNewRow}
+        onClickDeleteRow={onClickDeleteRow}
       />
     </>
   );
