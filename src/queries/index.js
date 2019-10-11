@@ -66,7 +66,6 @@ export const MUTATION_REGISTER = gql`
   }
 `;
 
-
 export const MUTATION_REGISTER_DELETE = gql`
   mutation mutationDeleteRegister($pk: Int!) {
     mutationDeleteRegister(pk: $pk) {
@@ -74,7 +73,6 @@ export const MUTATION_REGISTER_DELETE = gql`
     }
   }
 `;
-
 
 export const MUTATION_REGISTER_ROW_DELETE = gql`
   mutation mutationDeleteRegisterRow($pk: Int!) {
@@ -94,6 +92,14 @@ export const MUTATION_STATISTICS = gql`
         field
         messages
       }
+    }
+  }
+`;
+
+export const MUTATION_STATISTICS_DELETE = gql`
+  mutation mutationDeleteStatistics($pk: Int!) {
+    mutationDeleteStatistics(pk: $pk) {
+      success
     }
   }
 `;

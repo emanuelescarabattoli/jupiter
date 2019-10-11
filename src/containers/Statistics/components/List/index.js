@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTable } from "../../../../components/Card";
 import { Table, TableHeader, TableBody, TableRow, TableCell } from "../../../../components/Table";
 import Button from "../../../../components/Button";
 
-const List = ({ statistics, onClickShow, onClickNew }) => (
+const List = ({ statistics, onClickShow, onClickNew, onClickDelete }) => (
   <Card>
     <CardHeader>
       <Button onClick={onClickNew}>New</Button>
@@ -21,7 +21,7 @@ const List = ({ statistics, onClickShow, onClickNew }) => (
           {
             statistics.map(statistic => (
               <TableRow key={statistic.id}>
-                <TableCell><Button onClick={() => onClickShow(statistic.id)}>Show</Button></TableCell>
+                <TableCell><Button onClick={() => onClickShow(statistic.id)}>Show</Button><Button onClick={() => onClickDelete(statistic.id)}>Delete</Button></TableCell>
                 <TableCell>{statistic.description}</TableCell>
               </TableRow>
             ))
