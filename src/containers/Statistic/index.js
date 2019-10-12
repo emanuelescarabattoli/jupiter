@@ -13,13 +13,13 @@ import {
 
 const getIdByParams = match => match && match.params && match.params.statisticId || undefined;
 
-const Statistic = ({ match }) => {
+const Statistic = ({ match, history }) => {
   const id = getIdByParams(match);
 
   const statisticQuery = useQuery(QUERY_STATISTICS_DETAIL, { variables: { id }, skip: !id });
   const [saveStatistic, statisticMutation] = useMutation(MUTATION_STATISTICS);
   const [input, setInput] = useState({ description: "", note: "" });
-  const [isOnEdit, setIsOnEdit] = useState(false);
+  const [isOnEdit, setIsOnEdit] = useState(!id || false);
 
   useEffect(() => statisticQuery.data && statisticQuery.data.detailStatistics && setInput(statisticQuery.data.detailStatistics), [statisticQuery]);
 
@@ -39,7 +39,7 @@ const Statistic = ({ match }) => {
       }
     ).then(data => {
       if (!data.data.mutationStatistics.errors.length) {
-        setIsOnEdit(false);
+        history.push(`/statistic/${data.data.mutationStatistics.statistics.id}`);
       }
     });
   };
@@ -77,6 +77,7 @@ const Statistic = ({ match }) => {
         onSubmit={onSubmit}
         isOnEdit={isOnEdit}
         onClickEdit={onClickEdit}
+        id={id}
       />
     </>
   );

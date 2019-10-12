@@ -16,13 +16,13 @@ import {
 
 const getIdByParams = match => match && match.params && match.params.registerId || undefined;
 
-const Register = ({ match }) => {
+const Register = ({ match, history }) => {
   const id = getIdByParams(match);
 
   const registerQuery = useQuery(QUERY_REGISTER_DETAIL, { variables: { id }, skip: !id });
   const [saveRegister, registerMutation] = useMutation(MUTATION_REGISTER);
   const [input, setInput] = useState({ description: "", note: "", registerrowSet: [] });
-  const [isOnEdit, setIsOnEdit] = useState(false);
+  const [isOnEdit, setIsOnEdit] = useState(!id || false);
 
   const [loadRegisterRow, registerRowQuery] = useLazyQuery(QUERY_REGISTER_ROW_DETAIL);
   const [saveRegisterRow, registerRowMutation] = useMutation(MUTATION_REGISTER_ROW);
@@ -30,7 +30,6 @@ const Register = ({ match }) => {
   const [isOnEditRegisterRow, setIsOnEditRegisterRow] = useState(false);
 
   const [deleteRegisterRow, deleteRegisterRowMutation] = useMutation(MUTATION_REGISTER_ROW_DELETE);
-
 
   useEffect(() => registerQuery.data && registerQuery.data.detailRegister && setInput(registerQuery.data.detailRegister), [registerQuery]);
 
@@ -52,7 +51,7 @@ const Register = ({ match }) => {
       }
     ).then(data => {
       if (!data.data.mutationRegister.errors.length) {
-        setIsOnEdit(false);
+        history.push(`/register/${data.data.mutationRegister.register.id}`);
       }
     });
   };
@@ -124,6 +123,7 @@ const Register = ({ match }) => {
           registerMutation.error ||
           registerRowQuery.error ||
           registerRowMutation.error ||
+          deleteRegisterRowMutation.error ||
           (
             registerMutation.data &&
             registerMutation.data.mutationRegister.errors &&
@@ -150,6 +150,7 @@ const Register = ({ match }) => {
         onClickEditRow={onClickEditRow}
         onClickNewRow={onClickNewRow}
         onClickDeleteRow={onClickDeleteRow}
+        id={id}
       />
     </>
   );
