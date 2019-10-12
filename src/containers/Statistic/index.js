@@ -8,7 +8,9 @@ import LoadingMessage from "../../components/LoadingMessage";
 import {
   QUERY_STATISTICS_DETAIL,
   MUTATION_STATISTICS,
-  QUERY_STATISTICS_LIST
+  QUERY_STATISTICS_LIST,
+  QUERY_STATISTICS_ROW_REGISTER_LIST,
+  QUERY_STATISTICS_ROW_STATISTICS_LIST
 } from "../../queries";
 
 const getIdByParams = match => match && match.params && match.params.statisticId || undefined;
@@ -20,6 +22,9 @@ const Statistic = ({ match, history }) => {
   const [saveStatistic, statisticMutation] = useMutation(MUTATION_STATISTICS);
   const [input, setInput] = useState({ description: "", note: "" });
   const [isOnEdit, setIsOnEdit] = useState(!id || false);
+
+  const registerRows = useQuery(QUERY_STATISTICS_ROW_REGISTER_LIST, { variables: { statistics: id }, skip: !id });
+  const statisticsRows = useQuery(QUERY_STATISTICS_ROW_STATISTICS_LIST, { variables: { statistics: id }, skip: !id });
 
   useEffect(() => statisticQuery.data && statisticQuery.data.detailStatistics && setInput(statisticQuery.data.detailStatistics), [statisticQuery]);
 
@@ -55,7 +60,9 @@ const Statistic = ({ match, history }) => {
       {
         (
           statisticQuery.loading ||
-          statisticMutation.loading
+          statisticMutation.loading ||
+          registerRows.loading ||
+          statisticsRows.loading
         ) &&
         <LoadingMessage />
       }
@@ -63,6 +70,8 @@ const Statistic = ({ match, history }) => {
         (
           statisticQuery.error ||
           statisticMutation.error ||
+          registerRows.error ||
+          statisticsRows.error ||
           (
             statisticMutation.data &&
             statisticMutation.data.mutationStatistics.errors &&
@@ -77,6 +86,8 @@ const Statistic = ({ match, history }) => {
         onSubmit={onSubmit}
         isOnEdit={isOnEdit}
         onClickEdit={onClickEdit}
+        registerRows={registerRows}
+        statisticsRows={statisticsRows}
         id={id}
       />
     </>

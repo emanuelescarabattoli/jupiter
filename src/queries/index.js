@@ -105,17 +105,39 @@ export const MUTATION_STATISTICS_DELETE = gql`
 `;
 
 export const QUERY_REGISTER_ROW_DETAIL = gql`
-    query detailRegisterRow($id: Int) {
-      detailRegisterRow(id: $id) {
+  query detailRegisterRow($id: Int) {
+    detailRegisterRow(id: $id) {
+      id
+      date
+      description
+      period
+      amount
+      note
+    }
+  }
+`;
+
+export const QUERY_STATISTICS_ROW_REGISTER_LIST = gql`
+  query listStatisticsRowRegister($statistics: Int) {
+    listStatisticsRowRegister(statistics: $statistics) {
+      register {
         id
-        date
         description
-        period
-        amount
-        note
       }
     }
-  `;
+  }
+`;
+
+export const QUERY_STATISTICS_ROW_STATISTICS_LIST = gql`
+  query listStatisticsRowStatistics($statistics: Int) {
+    listStatisticsRowStatistics(statistics: $statistics) {
+      statistics {
+        id
+        description
+      }
+    }
+  }
+`;
 
 export const MUTATION_REGISTER_ROW = gql`
   mutation mutationRegisterRow($id: ID, $date: Date!, $description: String!, $period: String!, $amount: Float!, $note: String, $register: ID!) {

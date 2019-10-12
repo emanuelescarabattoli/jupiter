@@ -17,65 +17,67 @@ const Details = ({
   isOnEditRow,
   onClickEditRow,
   onClickNewRow,
-  onClickDeleteRow,
+  onClickDeleteRow
+  registerRows,
+  statisticsRows,
   id
 }) => (
-  <>
-    <Card>
+    <>
+      <Card>
+        {
+          !isOnEditRow && (
+            <CardHeader>
+              {isOnEdit && <Button onClick={onSubmit}>Submit</Button> || !isOnEdit && !isOnEditRow && <Button onClick={onClickEdit}>Edit</Button> || isOnEditRow && undefined}
+            </CardHeader>
+          )
+        }
+        <CardBody>
+          <Input disabled={!isOnEdit} name="description" placeholder="Description" value={values.description} onChange={onChange} />
+          <Input disabled={!isOnEdit} name="note" placeholder="Note" value={values.note} onChange={onChange} />
+        </CardBody>
+      </Card>
       {
-        !isOnEditRow && (
-          <CardHeader>
-            {isOnEdit && <Button onClick={onSubmit}>Submit</Button> || !isOnEdit && !isOnEditRow && <Button onClick={onClickEdit}>Edit</Button> || isOnEditRow && undefined}
-          </CardHeader>
+        id && (
+          <Card>
+            {
+              !isOnEditRow && !isOnEdit && (
+                <CardHeader>
+                  {!isOnEdit && !isOnEditRow && <Button onClick={onClickNewRow}>New</Button>}
+                </CardHeader>
+              )
+            }
+            <CardTable>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    {!isOnEdit && !isOnEditRow && <TableCell>Action</TableCell>}
+                    <TableCell>Description</TableCell>
+                    <TableCell>Amount</TableCell>
+                  </TableRow>
+                </TableHeader>
+                {
+                  values.registerrowSet.map(row => (
+                    <TableRow key={row.id}>
+                      {!isOnEdit && !isOnEditRow && <TableCell><Button onClick={() => onClickEditRow(row.id)}>Edit</Button><Button onClick={() => onClickDeleteRow(row.id)}>Delete</Button></TableCell>}
+                      <TableCell>{row.description}</TableCell>
+                      <TableCell>{row.amount}</TableCell>
+                    </TableRow>
+                  ))
+                }
+                <TableFooter>
+                  <TableRow>
+                    {!isOnEdit && !isOnEditRow && <TableCell />}
+                    <TableCell />
+                    <TableCell>{values.amount}</TableCell>
+                  </TableRow>
+                </TableFooter>
+              </Table>
+            </CardTable>
+          </Card>
         )
       }
-      <CardBody>
-        <Input disabled={!isOnEdit} name="description" placeholder="Description" value={values.description} onChange={onChange} />
-        <Input disabled={!isOnEdit} name="note" placeholder="Note" value={values.note} onChange={onChange} />
-      </CardBody>
-    </Card>
-    {
-      id && (
-        <Card>
-          {
-            !isOnEditRow && !isOnEdit && (
-              <CardHeader>
-                {!isOnEdit && !isOnEditRow && <Button onClick={onClickNewRow}>New</Button>}
-              </CardHeader>
-            )
-          }
-          <CardTable>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  {!isOnEdit && !isOnEditRow && <TableCell>Action</TableCell>}
-                  <TableCell>Description</TableCell>
-                  <TableCell>Amount</TableCell>
-                </TableRow>
-              </TableHeader>
-              {
-                values.registerrowSet.map(row => (
-                  <TableRow key={row.id}>
-                    {!isOnEdit && !isOnEditRow && <TableCell><Button onClick={() => onClickEditRow(row.id)}>Edit</Button><Button onClick={() => onClickDeleteRow(row.id)}>Delete</Button></TableCell>}
-                    <TableCell>{row.description}</TableCell>
-                    <TableCell>{row.amount}</TableCell>
-                  </TableRow>
-                ))
-              }
-              <TableFooter>
-                <TableRow>
-                  {!isOnEdit && !isOnEditRow && <TableCell />}
-                  <TableCell />
-                  <TableCell>{values.amount}</TableCell>
-                </TableRow>
-              </TableFooter>
-            </Table>
-          </CardTable>
-        </Card>
-      )
-    }
-    {
-      isOnEditRow &&
+      {
+        isOnEditRow &&
         <Card>
           <CardHeader>
             <Button onClick={onSubmitRow}>Submit</Button>
@@ -88,8 +90,8 @@ const Details = ({
             <Input name="note" placeholder="Note" value={valuesRow.note} onChange={onChangeRow} />
           </CardBody>
         </Card>
-    }
-  </>
-);
+      }
+    </>
+  );
 
 export default Details;
