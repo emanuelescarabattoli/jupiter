@@ -63,6 +63,49 @@ const Statistic = ({ match, history }) => {
     ).then(data => {
       if (!data.data.mutationStatistics.errors.length) {
         history.push(`/statistic/${data.data.mutationStatistics.statistics.id}`);
+        setIsOnEdit(false);
+      }
+    });
+  };
+
+  const onSubmitStatisticsRowRegister = () => {
+    saveStatisticsRowRegister(
+      {
+        variables: {
+          parent_statistics: id,
+          register: inputStatisticsRowRegister.register
+        },
+        refetchQueries: [
+          {
+            query: QUERY_STATISTICS_DETAIL,
+            variables: { id }
+          }
+        ]
+      }
+    ).then(data => {
+      if (!data.data.mutationStatisticsRowRegister.errors.length) {
+        setIsOnEditStatisticsRowRegister(false);
+      }
+    });
+  };
+
+  const onSubmitStatisticsRowStatistics = () => {
+    saveStatisticsRowStatistics(
+      {
+        variables: {
+          parent_statistics: id,
+          statistics: inputStatisticsRowStatistics.statistics
+        },
+        refetchQueries: [
+          {
+            query: QUERY_STATISTICS_DETAIL,
+            variables: { id }
+          }
+        ]
+      }
+    ).then(data => {
+      if (!data.data.mutationStatisticsRowStatistics.errors.length) {
+        setIsOnEditStatisticsRowStatistics(false);
       }
     });
   };
@@ -144,8 +187,20 @@ const Statistic = ({ match, history }) => {
         onSubmit={onSubmit}
         isOnEdit={isOnEdit}
         onClickEdit={onClickEdit}
-        registerRows={registerRows}
-        statisticsRows={statisticsRows}
+        registerRows={registerRows.data && registerRows.data.listStatisticsRowRegister || []}
+        statisticsRows={statisticsRows.data && statisticsRows.data.listStatisticsRowStatistics || []}
+        valuesStatisticsRowRegister={inputStatisticsRowRegister}
+        onChangeStatisticsRowRegister={onChangeStatisticsRowRegister}
+        onSubmitStatisticsRowRegister={onSubmitStatisticsRowRegister}
+        isOnEditStatisticsRowRegister={isOnEditStatisticsRowRegister}
+        onClickEditStatisticsRowRegister={onClickEditStatisticsRowRegister}
+        onClickNewStatisticsRowRegister={onClickNewStatisticsRowRegister}
+        valuesStatisticsRowStatistics={inputStatisticsRowStatistics}
+        onChangeStatisticsRowStatistics={onChangeStatisticsRowStatistics}
+        onSubmitStatisticsRowStatistics={onSubmitStatisticsRowStatistics}
+        isOnEditStatisticsRowStatistics={isOnEditStatisticsRowStatistics}
+        onClickEditStatisticsRowStatistics={onClickEditStatisticsRowStatistics}
+        onClickNewStatisticsRowStatistics={onClickNewStatisticsRowStatistics}
         id={id}
       />
     </>

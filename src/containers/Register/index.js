@@ -52,6 +52,7 @@ const Register = ({ match, history }) => {
     ).then(data => {
       if (!data.data.mutationRegister.errors.length) {
         history.push(`/register/${data.data.mutationRegister.register.id}`);
+        setIsOnEdit(false);
       }
     });
   };
