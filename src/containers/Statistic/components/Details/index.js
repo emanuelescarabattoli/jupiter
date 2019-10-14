@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTable, CardBody } from "../../../../components/Ca
 import { Table, TableHeader, TableRow, TableCell, TableFooter } from "../../../../components/Table";
 import Button from "../../../../components/Button";
 import Input from "../../../../components/Input";
+import Select from "../../../../components/Select";
 
 const Details = ({
   values,
@@ -25,7 +26,9 @@ const Details = ({
   isOnEditStatisticsRowStatistics,
   onClickEditStatisticsRowStatistics,
   onClickNewStatisticsRowStatistics,
-  id
+  id,
+  statisticsList,
+  registersList
 }) => (
   <>
     <Card>
@@ -60,7 +63,14 @@ const Details = ({
                   !isOnEdit &&
                     !isOnEditStatisticsRowRegister &&
                     !isOnEditStatisticsRowStatistics &&
-                    <Button onClick={onClickNewStatisticsRowRegister}>New</Button>}
+                    <Button onClick={onClickNewStatisticsRowRegister}>New register</Button>
+                }
+                {
+                  !isOnEdit &&
+                    !isOnEditStatisticsRowRegister &&
+                    !isOnEditStatisticsRowStatistics &&
+                    <Button onClick={onClickNewStatisticsRowStatistics}>New statistics</Button>
+                }
               </CardHeader>
             )
           }
@@ -75,7 +85,7 @@ const Details = ({
                       <TableCell>Action</TableCell>
                   }
                   <TableCell>Description</TableCell>
-                  <TableCell>Result</TableCell>
+                  <TableCell>Amount</TableCell>
                 </TableRow>
               </TableHeader>
               {
@@ -87,57 +97,10 @@ const Details = ({
                         <TableCell><Button onClick={() => onClickEditStatisticsRowRegister(row.id)}>Edit</Button><Button onClick={() => alert(row.id)}>Delete</Button></TableCell>
                     }
                     <TableCell>{row.register.description}</TableCell>
-                    <TableCell>{row.amount}</TableCell>
+                    <TableCell>{row.register.amount}</TableCell>
                   </TableRow>
                 ))
               }
-              <TableFooter>
-                <TableRow>
-                  {
-                    !isOnEdit &&
-                      !isOnEditStatisticsRowRegister &&
-                      !isOnEditStatisticsRowStatistics &&
-                      <TableCell />
-                  }
-                  <TableCell />
-                  <TableCell>{values.result}</TableCell>
-                </TableRow>
-              </TableFooter>
-            </Table>
-          </CardTable>
-        </Card>
-      )
-    }
-    {
-      id && (
-        <Card>
-          {
-            !isOnEditStatisticsRowStatistics &&
-              !isOnEditStatisticsRowRegister &&
-              !isOnEdit && (
-              <CardHeader>
-                {
-                  !isOnEdit &&
-                    !isOnEditStatisticsRowStatistics &&
-                    !isOnEditStatisticsRowRegister &&
-                    <Button onClick={onClickNewStatisticsRowStatistics}>New</Button>}
-              </CardHeader>
-            )
-          }
-          <CardTable>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  {
-                    !isOnEdit &&
-                      !isOnEditStatisticsRowStatistics &&
-                      !isOnEditStatisticsRowRegister &&
-                      <TableCell>Action</TableCell>
-                  }
-                  <TableCell>Description</TableCell>
-                  <TableCell>Result</TableCell>
-                </TableRow>
-              </TableHeader>
               {
                 statisticsRows.map(row => (
                   <TableRow key={row.id}>
@@ -148,7 +111,7 @@ const Details = ({
                         <TableCell><Button onClick={() => onClickEditStatisticsRowStatistics(row.id)}>Edit</Button><Button onClick={() => alert(row.id)}>Delete</Button></TableCell>
                     }
                     <TableCell>{row.statistics.description}</TableCell>
-                    <TableCell>{row.result}</TableCell>
+                    <TableCell>{row.statistics.result}</TableCell>
                   </TableRow>
                 ))
               }
@@ -156,8 +119,8 @@ const Details = ({
                 <TableRow>
                   {
                     !isOnEdit &&
-                      !isOnEditStatisticsRowStatistics &&
                       !isOnEditStatisticsRowRegister &&
+                      !isOnEditStatisticsRowStatistics &&
                       <TableCell />
                   }
                   <TableCell />
@@ -176,7 +139,15 @@ const Details = ({
             <Button onClick={onSubmitStatisticsRowRegister}>Submit</Button>
           </CardHeader>
           <CardBody>
-            <Input name="register" placeholder="Register" value={valuesStatisticsRowRegister.register.id} onChange={onChangeStatisticsRowRegister} />
+            <Select
+              options={registersList}
+              valueKey="id"
+              labelKey="description"
+              name="register"
+              placeholder="Register"
+              value={valuesStatisticsRowRegister.register}
+              onChange={onChangeStatisticsRowRegister}
+            />
           </CardBody>
         </Card>
     }
@@ -187,7 +158,15 @@ const Details = ({
             <Button onClick={onSubmitStatisticsRowStatistics}>Submit</Button>
           </CardHeader>
           <CardBody>
-            <Input name="statistics" placeholder="Statistics" value={valuesStatisticsRowStatistics.statistics.id} onChange={onChangeStatisticsRowStatistics} />
+            <Select
+              options={statisticsList}
+              valueKey="id"
+              labelKey="description"
+              name="statistics"
+              placeholder="Statistics"
+              value={valuesStatisticsRowStatistics.statistics}
+              onChange={onChangeStatisticsRowStatistics}
+            />
           </CardBody>
         </Card>
     }

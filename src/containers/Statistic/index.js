@@ -14,7 +14,8 @@ import {
   QUERY_STATISTICS_ROW_REGISTER_DETAIL,
   QUERY_STATISTICS_ROW_STATISTICS_DETAIL,
   MUTATION_STATISTICS_ROW_REGISTER,
-  MUTATION_STATISTICS_ROW_STATISTICS
+  MUTATION_STATISTICS_ROW_STATISTICS,
+  QUERY_REGISTER_LIST
 } from "../../queries";
 
 const getIdByParams = match => match && match.params && match.params.statisticId || undefined;
@@ -39,6 +40,9 @@ const Statistic = ({ match, history }) => {
   const [saveStatisticsRowStatistics, statisticsRowStatisticsMutation] = useMutation(MUTATION_STATISTICS_ROW_STATISTICS);
   const [inputStatisticsRowStatistics, setInputStatisticsRowStatistics] = useState({ id: undefined, statistics: { id: "" } });
   const [isOnEditStatisticsRowStatistics, setIsOnEditStatisticsRowStatistics] = useState(false);
+
+  const registersListQuery = useQuery(QUERY_REGISTER_LIST);
+  const statisticsListQuery = useQuery(QUERY_STATISTICS_LIST);
 
   useEffect(() => statisticQuery.data && statisticQuery.data.detailStatistics && setInput(statisticQuery.data.detailStatistics), [statisticQuery]);
 
@@ -72,13 +76,17 @@ const Statistic = ({ match, history }) => {
     saveStatisticsRowRegister(
       {
         variables: {
-          parent_statistics: id,
+          parentStatistics: id,
           register: inputStatisticsRowRegister.register
         },
         refetchQueries: [
           {
+            query: QUERY_STATISTICS_ROW_REGISTER_LIST,
+            variables: { statistics: id }
+          },
+          {
             query: QUERY_STATISTICS_DETAIL,
-            variables: { id }
+            variables: {id }
           }
         ]
       }
@@ -93,13 +101,17 @@ const Statistic = ({ match, history }) => {
     saveStatisticsRowStatistics(
       {
         variables: {
-          parent_statistics: id,
+          parentStatistics: id,
           statistics: inputStatisticsRowStatistics.statistics
         },
         refetchQueries: [
           {
+            query: QUERY_STATISTICS_ROW_STATISTICS_LIST,
+            variables: { statistics: id }
+          },
+          {
             query: QUERY_STATISTICS_DETAIL,
-            variables: { id }
+            variables: {id }
           }
         ]
       }
@@ -151,7 +163,9 @@ const Statistic = ({ match, history }) => {
           statisticsRowRegisterQuery.loading ||
           statisticsRowRegisterMutation.loading ||
           statisticsRowStatisticsQuery.loading ||
-          statisticsRowStatisticsMutation.loading
+          statisticsRowStatisticsMutation.loading ||
+          registersListQuery.loading ||
+          statisticsListQuery.loading
         ) &&
         <LoadingMessage />
       }
@@ -165,18 +179,20 @@ const Statistic = ({ match, history }) => {
           statisticsRowRegisterMutation.error ||
           statisticsRowStatisticsQuery.error ||
           statisticsRowStatisticsMutation.error ||
+          registersListQuery.error ||
+          statisticsListQuery.error ||
           (
             statisticMutation.data &&
             statisticMutation.data.mutationStatistics.errors &&
             statisticMutation.data.mutationStatistics.errors.length > 0
           ) || (
             statisticsRowRegisterMutation.data &&
-            statisticsRowRegisterMutation.data.statisticsRowRegister.errors &&
-            statisticsRowRegisterMutation.data.statisticsRowRegister.errors.length > 0
+            statisticsRowRegisterMutation.data.mutationStatisticsRowRegister.errors &&
+            statisticsRowRegisterMutation.data.mutationStatisticsRowRegister.errors.length > 0
           ) || (
             statisticsRowStatisticsMutation.data &&
-            statisticsRowStatisticsMutation.data.statisticsRowStatistics.errors &&
-            statisticsRowStatisticsMutation.data.statisticsRowStatistics.errors.length > 0
+            statisticsRowStatisticsMutation.data.mutationStatisticsRowStatistics.errors &&
+            statisticsRowStatisticsMutation.data.mutationStatisticsRowStatistics.errors.length > 0
           )
         ) &&
         <ErrorMessage />
@@ -189,6 +205,8 @@ const Statistic = ({ match, history }) => {
         onClickEdit={onClickEdit}
         registerRows={registerRows.data && registerRows.data.listStatisticsRowRegister || []}
         statisticsRows={statisticsRows.data && statisticsRows.data.listStatisticsRowStatistics || []}
+        registersList={registersListQuery.data && registersListQuery.data.listRegister || []}
+        statisticsList={statisticsListQuery.data && statisticsListQuery.data.listStatistics || []}
         valuesStatisticsRowRegister={inputStatisticsRowRegister}
         onChangeStatisticsRowRegister={onChangeStatisticsRowRegister}
         onSubmitStatisticsRowRegister={onSubmitStatisticsRowRegister}

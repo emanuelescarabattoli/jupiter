@@ -124,6 +124,7 @@ export const QUERY_STATISTICS_ROW_REGISTER_DETAIL = gql`
       register {
         id
         description
+        amount
       }
     }
   }
@@ -133,9 +134,10 @@ export const QUERY_STATISTICS_ROW_STATISTICS_DETAIL = gql`
   query detailStatisticsRowStatistics($id: Int) {
     detailStatisticsRowStatistics(id: $id) {
       id
-      register {
+      statistics {
         id
         description
+        result
       }
     }
   }
@@ -147,6 +149,7 @@ export const QUERY_STATISTICS_ROW_REGISTER_LIST = gql`
       register {
         id
         description
+        amount
       }
     }
   }
@@ -158,6 +161,7 @@ export const QUERY_STATISTICS_ROW_STATISTICS_LIST = gql`
       statistics {
         id
         description
+        result
       }
     }
   }
