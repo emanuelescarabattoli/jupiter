@@ -198,7 +198,7 @@ export const MUTATION_STATISTICS_ROW_REGISTER = gql`
 export const MUTATION_STATISTICS_ROW_STATISTICS = gql`
   mutation mutationStatisticsRowStatistics($id: ID, $parentStatistics: ID!, $statistics: ID!) {
     mutationStatisticsRowStatistics(input: {id: $id, parentStatistics: $parentStatistics, statistics: $statistics}) {
-      statisticsRowRegister {
+      statisticsRowStatistics {
         id
       }
       errors {
